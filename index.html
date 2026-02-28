@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de Catalina & Tomás</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; overflow: hidden; margin: 0; background-color: #F4F0F7; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        .accent-color { color: #5D3F75; } 
+        .bg-lavender-soft { background-color: #F4F0F7; } 
+        .olive-accent { color: #8BA889; }
+        
+        /* --- ESTILO DE INTRIGA MEJORADO --- */
+        .intriga-blur {
+            filter: blur(25px);
+            pointer-events: none;
+            user-select: none;
+            opacity: 0.4;
+            transition: all 1.5s ease;
+        }
+        .intriga-overlay {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 20; text-align: center;
+        }
+        .intriga-text {
+            color: #5D3F75;
+            animation: pulseText 3s infinite ease-in-out;
+        }
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* --- ESCENA INICIAL --- */
+        #video-overlay {
+            position: fixed; inset: 0; z-index: 9999; background-color: #000;
+            background-image: url('imagenes/WhatsApp Image 2026-02-28 at 23.26.16.jpeg');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.8s;
+        }
+        .intro-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 2s ease-in-out; z-index: 0; }
+        .fume-layer { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(58, 77, 57, 0.25) 0%, rgba(93, 63, 117, 0.25) 100%); backdrop-filter: blur(1.5px); z-index: 1; }
+        .intro-ui { position: relative; z-index: 10; text-align: center; padding: 20px; }
+        .btn-comencemos {
+            background-color: transparent; color: white; padding: 1rem 2.5rem; text-transform: uppercase;
+            letter-spacing: 0.3em; font-size: 0.7rem; font-weight: 600; border: 1.5px solid white;
+            border-radius: 9999px; transition: all 0.6s ease; cursor: pointer;
+        }
+        @media (min-width: 768px) {
+            .btn-comencemos { padding: 1.2rem 3.5rem; font-size: 0.75rem; }
+        }
+        .btn-comencemos:hover { background-color: white; color: #5D3F75; transform: translateY(-3px); }
+        .fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Hojas Cayendo */
+        #leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10001; overflow: hidden; }
+        .leaf { position: absolute; top: -20px; width: 12px; height: 12px; background: #8BA889; opacity: 0.6; border-radius: 0 100% 0 100%; animation: fall linear forwards; }
+        @media (min-width: 768px) { .leaf { width: 15px; height: 15px; } }
+        .leaf-lavender { background: #B19CD9; border-radius: 100% 0 100% 0; }
+        @keyframes fall {
+            0% { transform: translateY(0vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(105vh) translateX(100px) rotate(720deg); opacity: 0; }
+        }
+
+        .photo-frame { border: 6px solid white; outline: 1px solid #8BA889; outline-offset: -3px; box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.1); }
+        @media (min-width: 768px) { .photo-frame { border: 8px solid white; outline-offset: -4px; } }
+        
+        #music-control { position: fixed; bottom: 20px; right: 20px; z-index: 10002; background: rgba(139, 168, 137, 0.9); padding: 12px; border-radius: 50%; cursor: pointer; display: none; }
+        
+        .carta-bg {
+            background-color: #fffaf0;
+            border: 1px solid #e2d8ce;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+        .llave-input {
+            background: transparent; border: none; border-bottom: 2px solid #8BA889; 
+            color: #5D3F75; text-align: center; font-size: 1.2rem; letter-spacing: 0.3em; 
+            text-transform: uppercase; padding: 10px; width: 100%; max-width: 250px;
+        }
+        @media (min-width: 768px) {
+            .llave-input { font-size: 1.5rem; letter-spacing: 0.5em; max-width: 300px; }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div id="leaf-container"></div>
+
+    <div id="video-overlay">
+        <video id="bg-video-1" class="intro-bg-video" playsinline muted autoplay></video>
+        <video id="bg-video-2" class="intro-bg-video" playsinline muted style="opacity: 0;"></video>
+        <div class="fume-layer"></div>
+        <div class="intro-ui">
+            <div class="px-4">
+                <p class="uppercase font-light" style="color: white; letter-spacing: 0.3em; font-size: 0.6rem; margin-bottom: 1.5rem; md:letter-spacing: 0.5em; md:font-size: 0.7rem;">Nuestra historia comienza aquí</p>
+                <h2 class="serif italic text-6xl md:text-9xl" style="color: white;">C & T</h2>
+                <div class="w-8 h-[1px] bg-white/60 mx-auto mt-8 mb-8 md:w-12 md:mt-12 md:mb-12"></div>
+            </div>
+            <button onclick="startExperience()" class="btn-comencemos">Comencemos</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop></audio>
+    <div id="music-control" onclick="toggleMusic()">
+        <svg id="music-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+
+    <main id="main-content">
+        
+        <!-- HEADER MISTERIOSO -->
+        <header class="relative min-h-screen flex flex-col items-center justify-center p-4 pt-20">
+            <div class="intriga-overlay">
+                <div class="intriga-text px-4">
+                    <p class="serif italic text-2xl md:text-5xl mb-4">Nuestra historia se está preparando...</p>
+                    <p class="uppercase tracking-[0.3em] text-[8px] md:text-[10px] opacity-60">Próximamente</p>
+                </div>
+            </div>
+            <div class="intriga-blur text-center w-full h-full flex flex-col items-center justify-center">
+                <h1 class="text-4xl md:text-8xl mb-8 md:mb-12 serif italic accent-color">Catalina & Tomás</h1>
+                <div class="px-8 max-w-md w-full">
+                    <img src="imagenes/WhatsApp Image 2026-02-28 at 22.58.40 (1).jpeg" class="w-full photo-frame rotate-2">
+                </div>
+            </div>
+        </header>
+
+        <!-- SECCIÓN TESTIGOS (ÚNICA DESBLOQUEADA) -->
+        <section class="py-20 md:py-32 px-4 md:px-6 bg-white relative z-30" id="seccion-testigos">
+            <div id="cofre-cerrado" class="max-w-2xl mx-auto text-center reveal">
+                <div class="mb-8 md:mb-12">
+                    <svg class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6 olive-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <h2 class="serif italic text-3xl md:text-5xl accent-color mb-4">Un rincón para nuestros testigos</h2>
+                    <p class="text-gray-400 font-light text-xs md:text-sm tracking-widest uppercase italic">Ingresa la llave de honor</p>
+                </div>
+                <div class="mt-8 md:mt-10">
+                    <input type="text" id="codigo-llave" class="llave-input mb-8" placeholder="CÓDIGO">
+                    <br>
+                    <button onclick="verificarLlave()" class="bg-[#8BA889] text-white px-8 md:px-10 py-3 uppercase tracking-widest text-[9px] md:text-[10px] hover:bg-[#5D3F75] transition duration-500 rounded-full shadow-lg">Girar llave</button>
+                </div>
+            </div>
+            <div id="carta-abierta" class="max-w-5xl mx-auto" style="display:none; opacity:0; transition: opacity 1s ease;">
+                <div class="carta-bg p-6 md:p-16 rounded-sm relative">
+                    <h2 class="serif italic text-3xl md:text-5xl accent-color text-center mb-8 md:mb-10">A nuestros Testigos</h2>
+                    <div class="text-gray-700 font-light text-base md:text-xl leading-relaxed space-y-4 md:space-y-6 max-w-3xl mx-auto text-center md:text-justify serif">
+                        <p>A lo largo de nuestra vida, hemos cruzado caminos con muchas personas, pero muy pocas logran dejar una huella imborrable en el alma. Ustedes son esa rara y hermosa excepción.</p>
+                        <p>No los hemos elegido únicamente por el trámite legal, sino porque ya eran testigos de nuestra historia mucho antes de este día. Han estado ahí en las risas, en los desafíos, en los silencios compartidos y en los momentos donde el apoyo de un amigo vale más que mil palabras.</p>
+                        <p>Queremos que estén a nuestro lado cuando demos el "Sí", porque su presencia es un ancla para nosotros. Sabemos que con ustedes cerca, nuestro compromiso no solo se firma en un papel, sino que se sella en el corazón de nuestra familia por elección.</p>
+                        <p class="text-center font-bold mt-6 md:mt-8 accent-color">Gracias por aceptar este honor. Sin ustedes, nuestra historia estaría incompleta.</p>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-16 md:mt-20 text-center">
+                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#8BA889] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (3).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 1]</h3></div>
+                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#8BA889] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (4).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 2]</h3></div>
+                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#B19CD9] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (1).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 3]</h3></div>
+                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#B19CD9] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (2).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 4]</h3></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PIE DE PÁGINA MISTERIOSO -->
+        <div class="intriga-blur py-20 md:py-32 bg-lavender-soft">
+            <section class="text-center px-4">
+                <h2 class="serif italic text-3xl md:text-4xl opacity-30">Memorias</h2>
+                <div class="w-8 md:w-12 h-[1px] bg-gray-300 mx-auto mt-6"></div>
+            </section>
+        </div>
+
+        <footer class="py-12 md:py-16 bg-white text-center text-gray-400">
+            <p class="serif italic text-2xl md:text-3xl accent-color">C & T</p>
+            <p class="text-[8px] md:text-[10px] uppercase tracking-[0.4em] mt-4">24 . 04 . 2027</p>
+        </footer>
+    </main>
+
+    <script>
+        const video1 = document.getElementById("bg-video-1");
+        const video2 = document.getElementById("bg-video-2");
+        const music = document.getElementById("bg-music");
+        const overlay = document.getElementById("video-overlay");
+        const videoPlaylist = ["videos/video1.mp4", "videos/video2.mp4", "videos/video3.mp4"];
+        let currentIdx = 0;
+        let activeVideo = video1; let inactiveVideo = video2;
+
+        function crossover() {
+            currentIdx = (currentIdx + 1) % videoPlaylist.length;
+            inactiveVideo.src = videoPlaylist[currentIdx]; inactiveVideo.load();
+            inactiveVideo.oncanplaythrough = () => {
+                inactiveVideo.play(); inactiveVideo.style.opacity = "1"; activeVideo.style.opacity = "0";
+                let temp = activeVideo; activeVideo = inactiveVideo; inactiveVideo = temp;
+            };
+        }
+        
+        // Iniciar videos y hojas de inmediato
+        video1.src = videoPlaylist[0]; 
+        video1.play().catch(() => { console.log("Auto-play prevenido por el navegador"); });
+        setInterval(crossover, 8000);
+        createLeaves();
+
+        const musicPlaylist = ["musica/Lover - Taylor Swift - Wedding Violin Performance.mp3", "musica/Ojitos Lindos (Piano Instrumental).mp3"];
+        music.src = musicPlaylist[Math.floor(Math.random() * musicPlaylist.length)];
+
+        function startExperience() {
+            music.volume = 0; 
+            music.play().catch(() => { console.log("Error al reproducir música"); });
+            let vol = 0;
+            const volInterval = setInterval(() => { if (vol < 1) { vol += 0.05; music.volume = Math.min(vol, 1); } else { clearInterval(volInterval); } }, 100);
+            overlay.classList.add('fade-out');
+            document.body.style.overflow = 'auto';
+            document.getElementById('music-control').style.display = 'block';
+            setTimeout(() => { overlay.style.display = 'none'; reveal(); }, 1800);
+        }
+
+        function createLeaves() {
+            const container = document.getElementById("leaf-container");
+            setInterval(() => {
+                const leaf = document.createElement("div"); leaf.classList.add("leaf");
+                if (Math.random() > 0.5) leaf.classList.add("leaf-lavender");
+                leaf.style.left = Math.random() * 100 + "vw"; 
+                leaf.style.animationDuration = (Math.random() * 5 + 8) + "s";
+                container.appendChild(leaf); 
+                setTimeout(() => leaf.remove(), 12000);
+            }, 600);
+        }
+
+        function verificarLlave() {
+            if (document.getElementById('codigo-llave').value.trim().toUpperCase() === "HONOR") {
+                document.getElementById('cofre-cerrado').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('cofre-cerrado').style.display = 'none';
+                    const carta = document.getElementById('carta-abierta');
+                    carta.style.display = 'block';
+                    setTimeout(() => { carta.style.opacity = '1'; carta.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 50);
+                }, 800);
+            }
+        }
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        function toggleMusic() { if (music.paused) { music.play(); } else { music.pause(); } }
+    </script>
+</body>
+</html>

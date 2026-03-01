@@ -87,6 +87,9 @@
         @media (min-width: 768px) {
             .llave-input { font-size: 1.5rem; letter-spacing: 0.5em; max-width: 300px; }
         }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body class="text-gray-800">
@@ -130,36 +133,91 @@
             </div>
         </header>
 
-        <!-- SECCIÓN TESTIGOS (ÚNICA DESBLOQUEADA) -->
-        <section class="py-20 md:py-32 px-4 md:px-6 bg-white relative z-30" id="seccion-testigos">
-            <div id="cofre-cerrado" class="max-w-2xl mx-auto text-center reveal">
-                <div class="mb-8 md:mb-12">
-                    <svg class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-6 olive-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                    <h2 class="serif italic text-3xl md:text-5xl accent-color mb-4">Un rincón para nuestros testigos</h2>
-                    <p class="text-gray-400 font-light text-xs md:text-sm tracking-widest uppercase italic">Ingresa la llave de honor</p>
-                </div>
-                <div class="mt-8 md:mt-10">
-                    <input type="text" id="codigo-llave" class="llave-input mb-8" placeholder="CÓDIGO">
-                    <br>
-                    <button onclick="verificarLlave()" class="bg-[#8BA889] text-white px-8 md:px-10 py-3 uppercase tracking-widest text-[9px] md:text-[10px] hover:bg-[#5D3F75] transition duration-500 rounded-full shadow-lg">Girar llave</button>
-                </div>
-            </div>
-            <div id="carta-abierta" class="max-w-5xl mx-auto" style="display:none; opacity:0; transition: opacity 1s ease;">
-                <div class="carta-bg p-6 md:p-16 rounded-sm relative">
-                    <h2 class="serif italic text-3xl md:text-5xl accent-color text-center mb-8 md:mb-10">A nuestros Testigos</h2>
-                    <div class="text-gray-700 font-light text-base md:text-xl leading-relaxed space-y-4 md:space-y-6 max-w-3xl mx-auto text-center md:text-justify serif">
-                        <p>A lo largo de nuestra vida, hemos cruzado caminos con muchas personas, pero muy pocas logran dejar una huella imborrable en el alma. Ustedes son esa rara y hermosa excepción.</p>
-                        <p>No los hemos elegido únicamente por el trámite legal, sino porque ya eran testigos de nuestra historia mucho antes de este día. Han estado ahí en las risas, en los desafíos, en los silencios compartidos y en los momentos donde el apoyo de un amigo vale más que mil palabras.</p>
-                        <p>Queremos que estén a nuestro lado cuando demos el "Sí", porque su presencia es un ancla para nosotros. Sabemos que con ustedes cerca, nuestro compromiso no solo se firma en un papel, sino que se sella en el corazón de nuestra familia por elección.</p>
-                        <p class="text-center font-bold mt-6 md:mt-8 accent-color">Gracias por aceptar este honor. Sin ustedes, nuestra historia estaría incompleta.</p>
+        <!-- SECCIÓN DE HONOR (DAMAS, TESTIGOS, CABALLEROS) -->
+        <section class="py-20 md:py-32 px-4 md:px-6 bg-white relative z-30">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-8">
+                
+                <!-- DAMAS DE HONOR -->
+                <div class="reveal" id="sec-damas">
+                    <div id="cofre-cerrado-damas" class="text-center">
+                        <div class="mb-8">
+                            <svg class="w-10 h-10 mx-auto mb-6 text-[#B19CD9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            <h2 class="serif italic text-3xl accent-color mb-4">Damas de Honor</h2>
+                            <p class="text-gray-400 font-light text-xs tracking-widest uppercase italic">Ingresa la llave de honor</p>
+                        </div>
+                        <input type="text" id="codigo-damas" class="llave-input mb-6" placeholder="CÓDIGO" style="max-width: 200px;">
+                        <br>
+                        <button onclick="verificarLlave('damas')" class="bg-[#B19CD9] text-white px-8 py-2 uppercase tracking-widest text-[9px] hover:bg-[#5D3F75] transition duration-500 rounded-full shadow-lg">Girar llave</button>
                     </div>
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-16 md:mt-20 text-center">
-                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#8BA889] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (3).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 1]</h3></div>
-                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#8BA889] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (4).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 2]</h3></div>
-                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#B19CD9] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (1).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 3]</h3></div>
-                        <div><div class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full border-2 border-[#B19CD9] mb-4 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (2).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[10px] md:text-sm accent-color">[Testigo 4]</h3></div>
+                    <div id="carta-abierta-damas" style="display:none; opacity:0; transition: opacity 1s ease;">
+                        <div class="carta-bg p-6 rounded-sm relative">
+                            <h2 class="serif italic text-2xl accent-color text-center mb-6">A mis Damas</h2>
+                            <div class="text-gray-700 font-light text-sm leading-relaxed space-y-4 text-justify serif">
+                                <p>A mis amigas de siempre, a las que han estado en cada lágrima y cada carcajada. Su presencia hoy es el regalo más grande para mi corazón.</p>
+                                <p>Gracias por caminar a mi lado en esta nueva etapa. Sin ustedes, este camino no sería tan brillante.</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-8 text-center">
+                                <div><div class="w-16 h-16 mx-auto rounded-full border-2 border-[#B19CD9] mb-2 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (3).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[9px] accent-color">[Dama 1]</h3></div>
+                                <div><div class="w-16 h-16 mx-auto rounded-full border-2 border-[#B19CD9] mb-2 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (4).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[9px] accent-color">[Dama 2]</h3></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- TESTIGOS -->
+                <div class="reveal" id="sec-testigos">
+                    <div id="cofre-cerrado-testigos" class="text-center">
+                        <div class="mb-8">
+                            <svg class="w-10 h-10 mx-auto mb-6 olive-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            <h2 class="serif italic text-3xl accent-color mb-4">Testigos</h2>
+                            <p class="text-gray-400 font-light text-xs tracking-widest uppercase italic">Ingresa la llave de honor</p>
+                        </div>
+                        <input type="text" id="codigo-testigos" class="llave-input mb-6" placeholder="CÓDIGO" style="max-width: 200px;">
+                        <br>
+                        <button onclick="verificarLlave('testigos')" class="bg-[#8BA889] text-white px-8 py-2 uppercase tracking-widest text-[9px] hover:bg-[#5D3F75] transition duration-500 rounded-full shadow-lg">Girar llave</button>
+                    </div>
+                    <div id="carta-abierta-testigos" style="display:none; opacity:0; transition: opacity 1s ease;">
+                        <div class="carta-bg p-6 rounded-sm relative">
+                            <h2 class="serif italic text-2xl accent-color text-center mb-6">A nuestros Testigos</h2>
+                            <div class="text-gray-700 font-light text-sm leading-relaxed space-y-4 text-justify serif">
+                                <p>Ustedes son testigos de nuestra historia mucho antes de este día. Su apoyo ha sido un ancla para nosotros en cada momento compartido.</p>
+                                <p>Gracias por sellar este compromiso en el corazón de nuestra familia por elección.</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-8 text-center">
+                                <div><div class="w-16 h-16 mx-auto rounded-full border-2 border-[#8BA889] mb-2 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (1).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[9px] accent-color">[Testigo 1]</h3></div>
+                                <div><div class="w-16 h-16 mx-auto rounded-full border-2 border-[#8BA889] mb-2 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (2).jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[9px] accent-color">[Testigo 2]</h3></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CABALLEROS DE HONOR -->
+                <div class="reveal" id="sec-caballeros">
+                    <div id="cofre-cerrado-caballeros" class="text-center">
+                        <div class="mb-8">
+                            <svg class="w-10 h-10 mx-auto mb-6 text-[#5D3F75]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            <h2 class="serif italic text-3xl accent-color mb-4">Caballeros de Honor</h2>
+                            <p class="text-gray-400 font-light text-xs tracking-widest uppercase italic">Ingresa la llave de honor</p>
+                        </div>
+                        <input type="text" id="codigo-caballeros" class="llave-input mb-6" placeholder="CÓDIGO" style="max-width: 200px;">
+                        <br>
+                        <button onclick="verificarLlave('caballeros')" class="bg-[#5D3F75] text-white px-8 py-2 uppercase tracking-widest text-[9px] hover:bg-[#8BA889] transition duration-500 rounded-full shadow-lg">Girar llave</button>
+                    </div>
+                    <div id="carta-abierta-caballeros" style="display:none; opacity:0; transition: opacity 1s ease;">
+                        <div class="carta-bg p-6 rounded-sm relative">
+                            <h2 class="serif italic text-2xl accent-color text-center mb-6">A mis Caballeros</h2>
+                            <div class="text-gray-700 font-light text-sm leading-relaxed space-y-4 text-justify serif">
+                                <p>A mis hermanos de la vida, los que han estado en las buenas y en las no tan buenas. Gracias por acompañarme en el paso más importante.</p>
+                                <p>Que su presencia hoy sea el inicio de muchas más historias compartidas. ¡Gracias por estar!</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-8 text-center">
+                                <div><div class="w-16 h-16 mx-auto rounded-full border-2 border-[#5D3F75] mb-2 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02.jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[9px] accent-color">[Caballero 1]</h3></div>
+                                <div><div class="w-16 h-16 mx-auto rounded-full border-2 border-[#5D3F75] mb-2 overflow-hidden"><img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03.jpeg" class="w-full h-full object-cover"></div><h3 class="serif text-[9px] accent-color">[Caballero 2]</h3></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -212,6 +270,7 @@
             overlay.classList.add('fade-out');
             document.body.style.overflow = 'auto';
             document.getElementById('music-control').style.display = 'block';
+            createLeaves();
             setTimeout(() => { overlay.style.display = 'none'; reveal(); }, 1800);
         }
 
@@ -227,22 +286,33 @@
             }, 600);
         }
 
-        function verificarLlave() {
-            if (document.getElementById('codigo-llave').value.trim().toUpperCase() === "HONOR") {
-                document.getElementById('cofre-cerrado').style.opacity = '0';
+        function verificarLlave(tipo) {
+            const input = document.getElementById(`codigo-${tipo}`);
+            if (input.value.trim().toUpperCase() === "HONOR") {
+                const cofre = document.getElementById(`cofre-cerrado-${tipo}`);
+                const carta = document.getElementById(`carta-abierta-${tipo}`);
+                
+                cofre.style.opacity = '0';
                 setTimeout(() => {
-                    document.getElementById('cofre-cerrado').style.display = 'none';
-                    const carta = document.getElementById('carta-abierta');
+                    cofre.style.display = 'none';
                     carta.style.display = 'block';
-                    setTimeout(() => { carta.style.opacity = '1'; carta.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 50);
+                    setTimeout(() => { 
+                        carta.style.opacity = '1'; 
+                        carta.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+                    }, 50);
                 }, 800);
+            } else {
+                input.classList.add('border-red-400');
+                setTimeout(() => input.classList.remove('border-red-400'), 1000);
             }
         }
 
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
-                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) { reveals[i].classList.add("active"); }
+                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) { 
+                    reveals[i].classList.add("active"); 
+                }
             }
         }
         window.addEventListener("scroll", reveal);

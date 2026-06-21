@@ -164,7 +164,7 @@
 
     <div id="leaf-container"></div>
 <div id="video-overlay" onclick="startExperience()" class="cursor-pointer">
-    <video id="bg-video-1" class="intro-bg-video" playsinline muted autoplay loop src="videos/video3.mp4"></video>
+    <video id="bg-video-1" class="intro-bg-video" playsinline muted autoplay loop src="videos/save the date.mp4"></video>
     <div class="fume-layer"></div>
     <div class="intro-ui">
         <div class="px-4">
@@ -182,18 +182,6 @@
     <div class="mist-cloud mist-cloud-2"></div>
 </div>
 
-<!-- CONTENEDOR DE VIDEO DE REVELACIÓN -->
-<div id="doors-overlay" class="hidden">
-    <div class="relative w-full h-full flex items-center justify-center bg-black z-0">
-        <video id="reveal-video" class="w-full h-full max-h-screen object-contain" playsinline src="videos/save the date.mp4"></video>
-        
-        <!-- Botón para omitir/cerrar el video -->
-        <button id="btn-skip-video" onclick="skipRevealVideo()" class="absolute bottom-10 right-10 bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-2.5 rounded-full uppercase tracking-widest text-[10px] font-bold transition-all duration-300 backdrop-blur-md hover:scale-105 active:scale-95 opacity-0 pointer-events-none z-20">
-            Saltar Video
-        </button>
-    </div>
-</div>
-
     <audio id="bg-music" loop></audio>
     <div id="music-control" onclick="toggleMusic()">
         <svg id="music-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
@@ -201,16 +189,9 @@
 
     <main id="main-content">
         
-        <!-- HEADER MISTERIOSO -->
+        <!-- HEADER DE INVITACIÓN -->
         <header class="relative min-h-screen flex flex-col items-center justify-center p-4 pt-20">
-            <div id="unlock-overlay" class="intriga-overlay transition-opacity duration-1000 cursor-pointer" onclick="desbloquearHistoria()">
-                <div class="intriga-text px-4 flex flex-col items-center">
-                    <p class="serif italic text-2xl md:text-5xl mb-2">Nuestra historia se está preparando...</p>
-                    <p class="uppercase tracking-[0.3em] text-[8px] md:text-[10px] opacity-60 mb-6">Próximamente</p>
-                    <button class="btn-comencemos !border-[#5D3F75] !text-[#5D3F75] hover:!bg-[#5D3F75] hover:!text-white shadow-lg hover:scale-105 active:scale-95">Desbloquea nuestra historia</button>
-                </div>
-            </div>
-            <div class="intriga-blur text-center w-full h-full flex flex-col items-center justify-center py-6">
+            <div class="text-center w-full h-full flex flex-col items-center justify-center py-6">
                 <h1 class="text-4xl md:text-8xl mb-4 md:mb-6 serif italic accent-color">Catalina & Tomás</h1>
                 
                 <!-- CONTENEDOR DE COLLAGE DE PLAYA (UNO AL LADO DEL OTRO) -->
@@ -284,158 +265,68 @@
             </div>
         </header>
 
-        <!-- SECCIÓN DE HONOR (DAMAS, TESTIGOS, CABALLEROS) -->
+        <!-- SECCIÓN DE INVITACIÓN GENERAL -->
         <section class="py-20 md:py-32 px-4 md:px-6 bg-white relative z-30 overflow-hidden">
             <!-- Fotos Polaroid de fondo esparcidas en los extremos (solo en pantallas muy anchas) -->
             <div class="absolute left-2 xl:left-6 2xl:left-12 top-[10%] transform -rotate-12 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
                 <div class="photo-frame bg-white p-1.5 pb-4 shadow-md w-28 h-36">
-                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02.jpeg" class="w-full h-full object-cover" alt="Recuerdo Damas">
+                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02.jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 1">
                 </div>
             </div>
             <div class="absolute right-2 xl:right-6 2xl:right-12 top-[15%] transform rotate-8 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
                 <div class="photo-frame bg-white p-1.5 pb-4 shadow-md w-28 h-36">
-                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (1).jpeg" class="w-full h-full object-cover" alt="Recuerdo Caballeros">
+                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (1).jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 2">
                 </div>
             </div>
             <div class="absolute left-2 xl:left-8 2xl:left-16 top-[45%] transform rotate-6 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
                 <div class="photo-frame bg-white p-1.5 pb-4 shadow-md w-28 h-36">
-                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (2).jpeg" class="w-full h-full object-cover" alt="Recuerdo Testigos">
+                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (2).jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 3">
                 </div>
             </div>
             <div class="absolute right-2 xl:right-8 2xl:right-16 top-[40%] transform -rotate-10 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
                 <div class="photo-frame bg-white p-1.5 pb-4 shadow-md w-28 h-36">
-                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (3).jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda">
+                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (3).jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 4">
                 </div>
             </div>
             <div class="absolute left-3 xl:left-10 2xl:left-20 top-[75%] transform -rotate-8 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
                 <div class="photo-frame bg-white p-1.5 pb-4 shadow-md w-28 h-36">
-                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (4).jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 2">
+                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (4).jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 5">
                 </div>
             </div>
             <div class="absolute right-3 xl:right-10 2xl:right-20 top-[80%] transform rotate-12 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
                 <div class="photo-frame bg-white p-1.5 pb-4 shadow-md w-28 h-36">
-                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03.jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 3">
+                    <img src="imagenes/WhatsApp Image 2026-02-28 at 23.03.03.jpeg" class="w-full h-full object-cover" alt="Recuerdo Boda 6">
                 </div>
             </div>
 
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-8 relative z-20">
+            <div class="max-w-3xl mx-auto text-center relative z-20 space-y-8 px-4">
+                <div class="mb-6 relative inline-block">
+                    <div class="absolute inset-0 bg-[#5D3F75] rounded-full blur-2xl opacity-10 animate-pulse"></div>
+                    <svg class="w-12 h-12 mx-auto text-[#5D3F75] relative z-10 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                </div>
                 
-                <!-- DAMAS DE HONOR -->
-                <div class="reveal" id="sec-damas">
-                    <div id="cofre-cerrado-damas" class="text-center">
-                        <div class="mb-8">
-                            <svg class="w-10 h-10 mx-auto mb-6 text-[#B19CD9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                            <h2 class="serif italic text-3xl accent-color mb-4">Damas de Honor</h2>
-                            <p class="text-gray-400 font-light text-xs tracking-widest uppercase italic">Ingresa la llave de honor</p>
-                        </div>
-                        <input type="text" id="codigo-damas" class="llave-input mb-6" placeholder="CÓDIGO" style="max-width: 200px;">
-                        <br>
-                        <button onclick="verificarLlave('damas')" class="bg-[#B19CD9] text-white px-8 py-2 uppercase tracking-widest text-[9px] hover:bg-[#5D3F75] transition duration-500 rounded-full shadow-lg">Girar llave</button>
-                    </div>
-                    <div id="carta-abierta-damas" style="display:none; opacity:0; transition: opacity 1s ease;">
-                        <div class="carta-bg p-6 rounded-sm relative">
-                            <h2 class="serif italic text-2xl accent-color text-center mb-6">A mis Damas</h2>
-                            <div class="text-gray-700 font-light text-sm leading-relaxed space-y-4 text-justify serif">
-                                <p>A mis amigas del alma y a mi familia. A quienes crecieron conmigo, a quienes llegaron después y se quedaron para siempre. Ustedes son mi historia, mi refugio y el amor que me sostuvo en cada etapa de mi vida.</p>
-                                <p>Gracias por caminar a mi lado en cada lágrima y en cada carcajada. Por abrazarme en los días difíciles, por impulsarme a ser valiente y por celebrar cada sueño como si fuera propio.</p>
-                                <p>Hoy comienza una nueva etapa, pero nada de lo que soy estaría completo sin ustedes. Porque antes de este “para siempre”, estuvieron ustedes. Siempre.</p>
-                                <p class="text-center italic mt-6 opacity-80">“I had the time of my life fighting dragons with you.”</p>
-                                <p class="text-center text-[10px] uppercase tracking-widest opacity-60">— Taylor Swift, Long Live</p>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4 mt-8 text-center">
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Camila Gellner</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Agostina Sobisch</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Ornella Manzur</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Lucrecia Lujan</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Eliana Armoa</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Maria Jose Flores</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Paula Laulhé</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Melanie Alonso</h3></div>
-                                <div><div class="w-14 h-14 mx-auto mb-2 flex items-center justify-center text-[#B19CD9] opacity-90"><svg fill="currentColor" viewBox="0 0 24 24" class="w-12 h-12"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z M12,7C12,7 10,5 8,5C6,5 5,7 5,8C5,10 12,15 12,15C12,15 19,10 19,8C19,7 18,5 16,5C14,5 12,7 12,7Z M12,12C12,12 14,10 14,8C14,6 12,5 12,5C12,5 10,6 10,8C10,10 12,12 12,12Z M12,17C12,17 16,13 16,10C16,8 14,7 12,7C10,7 8,8 8,10C8,13 12,17 12,17Z"/></svg></div><h3 class="serif text-[9px] accent-color">Milagros Bustos</h3></div>
-                            </div>
-                        </div>
-                    </div>
+                <h2 class="serif italic text-4xl md:text-5xl accent-color mb-4">Nuestra Unión</h2>
+                <p class="text-gray-500 font-light tracking-[0.25em] uppercase text-[10px] md:text-xs">Uniendo nuestros caminos para siempre</p>
+                
+                <div class="w-12 h-[1px] bg-gray-300 mx-auto my-8"></div>
+                
+                <div class="text-gray-700 font-light text-base md:text-lg leading-relaxed space-y-6 serif max-w-2xl mx-auto text-center px-2">
+                    <p class="italic font-normal text-xl md:text-2xl text-gray-800">
+                        "Hay momentos en la vida que son inolvidables, y compartirlos con quienes más amamos los hace eternos."
+                    </p>
+                    <p class="font-light text-gray-600 text-sm md:text-base leading-relaxed pt-2">
+                        Tenemos la inmensa alegría de invitarlos a celebrar nuestra boda. Su presencia, su cariño y sus buenos deseos son el mejor regalo que podríamos recibir para dar inicio a esta hermosa etapa juntos.
+                    </p>
+                    <p class="serif italic text-lg md:text-xl text-[#8BA889] font-medium pt-4">
+                        ¡Nos encantaría que nos acompañen a celebrar el amor!
+                    </p>
                 </div>
+            </div>
+        </section>
 
-                <!-- TESTIGOS -->
-                <div class="reveal" id="sec-testigos">
-                    <div id="cofre-cerrado-testigos" class="text-center">
-                        <div class="mb-8">
-                            <svg class="w-10 h-10 mx-auto mb-6 olive-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                            <h2 class="serif italic text-3xl accent-color mb-4">Testigos</h2>
-                            <p class="text-gray-400 font-light text-xs tracking-widest uppercase italic">Ingresa la llave de honor</p>
-                        </div>
-                        <input type="text" id="codigo-testigos" class="llave-input mb-6" placeholder="CÓDIGO" style="max-width: 200px;">
-                        <br>
-                        <button onclick="verificarLlave('testigos')" class="bg-[#8BA889] text-white px-8 py-2 uppercase tracking-widest text-[9px] hover:bg-[#5D3F75] transition duration-500 rounded-full shadow-lg">Girar llave</button>
-                    </div>
-                    <div id="carta-abierta-testigos" style="display:none; opacity:0; transition: opacity 1s ease;">
-                        <div class="carta-bg p-6 rounded-sm relative">
-                            <h2 class="serif italic text-2xl accent-color text-center mb-6">A nuestros Testigos</h2>
-                            <div class="text-gray-700 font-light text-sm leading-relaxed space-y-4 text-justify serif">
-                                <p>Ustedes son testigos de nuestra historia mucho antes de este día. Su apoyo ha sido un ancla para nosotros en cada momento compartido.</p>
-                                <p>Gracias por sellar este compromiso con el corazón en este día tan importante.</p>
-                            </div>
-                            <div class="space-y-10 mt-10">
-                                <div>
-                                    <p class="uppercase tracking-widest text-[10px] text-gray-600 mb-4 border-b border-gray-100 pb-2 font-bold">Testigos de Iglesia</p>
-                                    <div class="grid grid-cols-2 gap-4 text-center">
-                                        <div><div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-[#5D3F75] opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg></div><h3 class="serif text-[9px] accent-color">Milagros Bustos</h3></div>
-                                        <div><div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-[#5D3F75] opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg></div><h3 class="serif text-[9px] accent-color">Martin Saleme</h3></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="uppercase tracking-widest text-[10px] text-gray-600 mb-4 border-b border-gray-100 pb-2 font-bold">Testigos de Civil</p>
-                                    <div class="grid grid-cols-2 gap-4 text-center">
-                                        <div><div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-[#5D3F75] opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg></div><h3 class="serif text-[9px] accent-color">Agostina Sobisch</h3></div>
-                                        <div><div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-[#5D3F75] opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg></div><h3 class="serif text-[9px] accent-color">Santino Sobisch</h3></div>
-                                        <div><div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-[#5D3F75] opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg></div><h3 class="serif text-[9px] accent-color">Camila Gellner</h3></div>
-                                        <div><div class="w-12 h-12 mx-auto mb-2 flex items-center justify-center text-[#5D3F75] opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg></div><h3 class="serif text-[9px] accent-color">Exequiel Gellner</h3></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CABALLEROS DE HONOR -->
-                <div class="reveal" id="sec-caballeros">
-                    <div id="cofre-cerrado-caballeros" class="text-center">
-                        <div class="mb-8">
-                            <svg class="w-10 h-10 mx-auto mb-6 text-[#5D3F75]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                            <h2 class="serif italic text-3xl accent-color mb-4">Caballeros de Honor</h2>
-                            <p class="text-gray-400 font-light text-xs tracking-widest uppercase italic">Ingresa la llave de honor</p>
-                        </div>
-                        <input type="text" id="codigo-caballeros" class="llave-input mb-6" placeholder="CÓDIGO" style="max-width: 200px;">
-                        <br>
-                        <button onclick="verificarLlave('caballeros')" class="bg-[#5D3F75] text-white px-8 py-2 uppercase tracking-widest text-[9px] hover:bg-[#8BA889] transition duration-500 rounded-full shadow-lg">Girar llave</button>
-                    </div>
-                    <div id="carta-abierta-caballeros" style="display:none; opacity:0; transition: opacity 1s ease;">
-                        <div class="carta-bg p-6 rounded-sm relative">
-                            <h2 class="serif italic text-2xl accent-color text-center mb-6">Mis Caballeros</h2>
-                            <div class="text-gray-700 font-light text-sm leading-relaxed space-y-4 text-justify serif">
-                                <p>"Dicen que la familia es la que te toca, pero también es la que uno elige en el camino. Ustedes son esa elección constante. Son los que han estado en las buenas, en las malas y en esas anécdotas que solo nosotros entendemos. Más que amigos, son mis pilares."</p>
-                                <p>"Hoy, frente al paso más importante que voy a dar, no me imagino el camino hacia el altar sin tenerlos a mis espaldas. Su presencia como mis Caballeros de Honor es el reflejo del respeto y la admiración que siento por cada uno de ustedes."</p>
-                                <p>"Gracias por aceptar ser parte de mi guardia de honor, por cuidar mis pasos y por celebrar conmigo este capítulo. Es un honor para mí que me acompañen."</p>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4 mt-8 text-center">
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Santino Sobisch</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Ignacio Pedrosa</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Martin Saleme</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Gaston Ronco</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Julian Murua Onzaga</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Exequiel Gellner</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Stephan Zimmermann</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Juan Bordarampe</h3></div>
-                                <div><div class="w-8 h-8 mx-auto mb-2 flex items-center justify-center text-black opacity-60"><svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path d="M15,12L20,17V7L15,12M9,12L4,7V17L9,12M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg></div><h3 class="serif text-[9px] accent-color">Dario Giordano</h3></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                </section>
-
-                <!-- UBICACIÓN SECRETA -->
+                <!-- UBICACIÓN -->
                 <section class="py-20 bg-[#F4F0F7] relative overflow-hidden reveal">
                     <!-- Fotos Polaroid de fondo esparcidas en los extremos (solo en pantallas muy anchas) -->
                     <div class="absolute left-2 xl:left-6 2xl:left-12 top-[15%] transform rotate-6 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
@@ -467,8 +358,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
                 </div>
-                <h2 class="serif italic text-4xl md:text-6xl accent-color mb-6">El Escenario Secreto</h2>
-                <p class="text-gray-500 font-light tracking-[0.2em] uppercase text-xs mb-12">Donde nuestra historia se hará eterna</p>
+                <h2 class="serif italic text-4xl md:text-6xl accent-color mb-6">Ubicación</h2>
+                <p class="text-gray-500 font-light tracking-[0.2em] uppercase text-xs mb-12">Los lugares donde celebraremos nuestro gran día</p>
 
                 <!-- TARJETAS DE UBICACIÓN (CEREMONIA & CELEBRACIÓN) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto mt-12 text-center relative z-20">
@@ -546,7 +437,7 @@
                 </section>
 
                 <!-- PIE DE PÁGINA MISTERIOSO -->
-        <div class="intriga-blur py-20 md:py-32 bg-lavender-soft relative overflow-hidden">
+        <div class="py-20 md:py-32 bg-lavender-soft relative overflow-hidden">
             <!-- Fotos Polaroid de fondo esparcidas en los extremos (solo en pantallas muy anchas) -->
             <div class="absolute left-4 xl:left-12 2xl:left-24 top-[15%] transform -rotate-12 z-10 hidden xl:block hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer pointer-events-auto">
                 <div class="photo-frame bg-white p-1.5 pb-4 shadow-md w-28 h-36">
@@ -574,10 +465,9 @@
     <script>
         const video1 = document.getElementById("bg-video-1");
         const music = document.getElementById("bg-music");
-        const overlay = document.getElementById("video-overlay");
         
-        // Dejar solo el video 3 fijo
-        video1.src = "videos/video3.mp4"; 
+        // Dejar solo el video 3 fijo (ahora el save the date)
+        video1.src = "videos/save the date.mp4"; 
         video1.play().catch(() => { console.log("Auto-play prevenido por el navegador"); });
         createLeaves();
 
@@ -598,56 +488,52 @@
             // 2. Bloquear scroll
             document.body.style.overflow = 'hidden';
             
-            // 3. Preparar el video de revelación
-            const revealVideo = document.getElementById("reveal-video");
-            const doorsOverlay = document.getElementById("doors-overlay");
-            
-            if (revealVideo) {
-                revealVideo.muted = false;
-                revealVideo.currentTime = 0;
+            // 3. Tras 1.8s (bruma densa), ocultar la pantalla inicial y revelar el landing
+            setTimeout(() => {
+                // Ocultar pantalla inicial
+                const overlayEl = document.getElementById("video-overlay");
+                if (overlayEl) {
+                    overlayEl.style.display = 'none';
+                }
                 
-                revealVideo.onerror = () => {
-                    console.log("Error de video, finalizando...");
-                    finalizarRevelacion();
-                };
+                // Quitar el desenfoque de las coordenadas si existiera
+                const coordBlur = document.querySelector(".filter.blur-[4px]");
+                if (coordBlur) {
+                    coordBlur.classList.remove("filter", "blur-[4px]");
+                }
                 
-                // 4. Tras 2s (bruma densa), cambiar el video y ocultar la pantalla inicial
-                setTimeout(() => {
-                    // Ocultar pantalla inicial
-                    const overlayEl = document.getElementById("video-overlay");
-                    if (overlayEl) {
-                        overlayEl.style.display = 'none';
-                    }
-                    
-                    // Mostrar contenedor de video
-                    if (doorsOverlay) {
-                        doorsOverlay.classList.remove("hidden");
-                        doorsOverlay.offsetHeight; // Forzar reflow
-                        doorsOverlay.style.opacity = "1";
-                    }
-                    
-                    revealVideo.play().catch(err => {
-                        console.log("Error al reproducir video:", err);
-                        revealVideo.muted = true;
-                        revealVideo.play().catch(e => console.log("Fallback silenciado falló:", e));
-                    });
-                    
-                    // Mostrar botón "Saltar" tras 2s
-                    setTimeout(() => {
-                        const skipBtn = document.getElementById("btn-skip-video");
-                        if (skipBtn) {
-                            skipBtn.classList.remove("opacity-0", "pointer-events-none");
+                // Habilitar scroll
+                document.body.style.overflow = 'auto';
+                
+                // Iniciar música de fondo
+                if (music) {
+                    music.volume = 0;
+                    music.play().catch(err => console.log("Error al reproducir música:", err));
+                    let vol = 0;
+                    const volInterval = setInterval(() => {
+                        if (vol < 1) {
+                            vol += 0.05;
+                            music.volume = Math.min(vol, 1);
+                        } else {
+                            clearInterval(volInterval);
                         }
-                    }, 2000);
-
-                    // Desvanecer la bruma para revelar el video
+                    }, 100);
+                }
+                
+                const musicCtrl = document.getElementById('music-control');
+                if (musicCtrl) {
+                    musicCtrl.style.display = 'block';
+                }
+                
+                // Desvanecer la bruma para mostrar el landing
+                setTimeout(() => {
                     if (mist) {
                         mist.classList.remove("active");
                     }
-                }, 2000);
+                    reveal();
+                }, 100);
                 
-                revealVideo.onended = finalizarRevelacion;
-            }
+            }, 1800);
         }
 
         function createLeaves() {
@@ -662,26 +548,6 @@
             }, 600);
         }
 
-        function verificarLlave(tipo) {
-            const input = document.getElementById(`codigo-${tipo}`);
-            if (input.value.trim().toUpperCase() === "HONOR") {
-                const cofre = document.getElementById(`cofre-cerrado-${tipo}`);
-                const carta = document.getElementById(`carta-abierta-${tipo}`);
-                
-                cofre.style.opacity = '0';
-                setTimeout(() => {
-                    cofre.style.display = 'none';
-                    carta.style.display = 'block';
-                    setTimeout(() => { 
-                        carta.style.opacity = '1'; 
-                        carta.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-                    }, 50);
-                }, 800);
-            } else {
-                input.classList.add('border-red-400');
-                setTimeout(() => input.classList.remove('border-red-400'), 1000);
-            }
-        }
 
         function revelarCeremonia() {
             window.open("https://maps.app.goo.gl/3uxEeH52hYGGCT219", "_blank");
@@ -821,96 +687,6 @@
             }
         });
     
-    function skipRevealVideo() {
-        const revealVideo = document.getElementById("reveal-video");
-        if (revealVideo) {
-            revealVideo.pause();
-        }
-        finalizarRevelacion();
-    }
-    
-    function finalizarRevelacion() {
-        const doorsOverlay = document.getElementById("doors-overlay");
-        const bgMusic = document.getElementById("bg-music");
-        const mist = document.getElementById("mist-overlay");
-        
-        if (!mist) return;
-        
-        // 1. Mostrar la bruma de transición
-        mist.classList.add("active");
-        
-        // 2. Tras 2s (bruma densa), ocultar el video y revelar el landing
-        setTimeout(() => {
-            const revealVideo = document.getElementById("reveal-video");
-            if (revealVideo) {
-                revealVideo.pause();
-            }
-            
-            // Ocultar contenedor de video
-            if (doorsOverlay) {
-                doorsOverlay.style.opacity = "0";
-                doorsOverlay.classList.add("hidden");
-            }
-            
-            // Quitar el desenfoque/bruma del landing
-            const blurs = document.querySelectorAll(".intriga-blur");
-            blurs.forEach(el => {
-                el.classList.remove("intriga-blur");
-                el.style.filter = "none";
-                el.style.opacity = "1";
-                el.style.pointerEvents = "auto";
-                el.style.userSelect = "auto";
-            });
-            
-            // Quitar el desenfoque de las coordenadas
-            const coordBlur = document.querySelector(".filter.blur-\\[4px\\]");
-            if (coordBlur) {
-                coordBlur.classList.remove("filter", "blur-[4px]");
-            }
-            
-            // Ocultar el overlay de intriga (lock screen) por completo
-            const unlockOverlay = document.getElementById("unlock-overlay");
-            if (unlockOverlay) {
-                unlockOverlay.style.display = "none";
-            }
-            
-            // Habilitar scroll
-            document.body.style.overflow = 'auto';
-            
-            // Iniciar música de fondo
-            const musicPlaylist = ["musica/Lover - Taylor Swift - Wedding Violin Performance.mp3", "musica/Ojitos Lindos (Piano Instrumental).mp3"];
-            if (bgMusic) {
-                if (!bgMusic.src) {
-                    bgMusic.src = musicPlaylist[Math.floor(Math.random() * musicPlaylist.length)];
-                }
-                bgMusic.volume = 0;
-                bgMusic.play().catch(err => console.log("Error al reproducir música:", err));
-                let vol = 0;
-                const volInterval = setInterval(() => {
-                    if (vol < 1) {
-                        vol += 0.05;
-                        bgMusic.volume = Math.min(vol, 1);
-                    } else {
-                        clearInterval(volInterval);
-                    }
-                }, 100);
-            }
-            
-            const musicCtrl = document.getElementById('music-control');
-            if (musicCtrl) {
-                musicCtrl.style.display = 'block';
-            }
-            createLeaves();
-            
-            // Desvanecer la bruma para mostrar el landing
-            setTimeout(() => {
-                mist.classList.remove("active");
-                reveal();
-            }, 100);
-            
-        }, 2000);
-    }
-
     function toggleMusic() { if (music.paused) { music.play(); } else { music.pause(); } }
 </script>
 </body>

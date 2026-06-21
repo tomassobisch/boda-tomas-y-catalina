@@ -99,6 +99,63 @@
         .animate-scan {
             animation: scan 3s infinite linear;
         }
+
+        /* --- PUERTAS Y REVELACIÓN DE VIDEO --- */
+        #doors-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            overflow: hidden;
+            opacity: 1;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .door {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #5D3F75;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+            transition: transform 2.5s cubic-bezier(0.7, 0, 0.3, 1);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        #door-left {
+            left: 0;
+            justify-content: flex-end;
+            border-right: 2px solid #8BA889;
+        }
+        
+        #door-right {
+            right: 0;
+            justify-content: flex-start;
+            border-left: 2px solid #8BA889;
+        }
+        
+        .door-content {
+            color: #F4F0F7;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 40px;
+            user-select: none;
+            transition: opacity 1s ease;
+        }
+
+        .door-ornament {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #8BA889, transparent);
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -117,6 +174,35 @@
     </div>
 </div>
 
+<!-- CONTENEDOR DE PUERTAS Y VIDEO DE REVELACIÓN -->
+<div id="doors-overlay" class="hidden">
+    <!-- Puerta Izquierda -->
+    <div id="door-left" class="door">
+        <div class="door-content">
+            <span class="italic text-6xl md:text-8xl opacity-80">C</span>
+            <div class="door-ornament"></div>
+        </div>
+    </div>
+    
+    <!-- Puerta Derecha -->
+    <div id="door-right" class="door">
+        <div class="door-content">
+            <span class="italic text-6xl md:text-8xl opacity-80">T</span>
+            <div class="door-ornament"></div>
+        </div>
+    </div>
+
+    <!-- Video de revelación detrás de las puertas -->
+    <div class="relative w-full h-full flex items-center justify-center bg-black z-0">
+        <video id="reveal-video" class="w-full h-full max-h-screen object-contain" playsinline src="videos/save the date.mp4"></video>
+        
+        <!-- Botón para omitir/cerrar el video -->
+        <button id="btn-skip-video" onclick="skipRevealVideo()" class="absolute bottom-10 right-10 bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-2.5 rounded-full uppercase tracking-widest text-[10px] font-bold transition-all duration-300 backdrop-blur-md hover:scale-105 active:scale-95 opacity-0 pointer-events-none z-20">
+            Saltar Video
+        </button>
+    </div>
+</div>
+
     <audio id="bg-music" loop></audio>
     <div id="music-control" onclick="toggleMusic()">
         <svg id="music-icon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
@@ -126,10 +212,11 @@
         
         <!-- HEADER MISTERIOSO -->
         <header class="relative min-h-screen flex flex-col items-center justify-center p-4 pt-20">
-            <div class="intriga-overlay">
-                <div class="intriga-text px-4">
-                    <p class="serif italic text-2xl md:text-5xl mb-4">Nuestra historia se está preparando...</p>
-                    <p class="uppercase tracking-[0.3em] text-[8px] md:text-[10px] opacity-60">Próximamente</p>
+            <div id="unlock-overlay" class="intriga-overlay transition-opacity duration-1000">
+                <div class="intriga-text px-4 flex flex-col items-center">
+                    <p class="serif italic text-2xl md:text-5xl mb-2">Nuestra historia se está preparando...</p>
+                    <p class="uppercase tracking-[0.3em] text-[8px] md:text-[10px] opacity-60 mb-6">Próximamente</p>
+                    <button onclick="desbloquearHistoria()" class="btn-comencemos !border-[#5D3F75] !text-[#5D3F75] hover:!bg-[#5D3F75] hover:!text-white shadow-lg hover:scale-105 active:scale-95">Desbloquea nuestra historia</button>
                 </div>
             </div>
             <div class="intriga-blur text-center w-full h-full flex flex-col items-center justify-center">
@@ -375,7 +462,102 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        function toggleMusic() { if (music.paused) { music.play(); } else { music.pause(); } }
-    </script>
+    
+    function desbloquearHistoria() {
+        const doorsOverlay = document.getElementById("doors-overlay");
+        const doorLeft = document.getElementById("door-left");
+        const doorRight = document.getElementById("door-right");
+        const revealVideo = document.getElementById("reveal-video");
+        const bgMusic = document.getElementById("bg-music");
+        
+        // 1. Mostrar el contenedor de las puertas
+        doorsOverlay.classList.remove("hidden");
+        doorsOverlay.style.opacity = "1";
+        
+        // 2. Pausar la música de fondo
+        if (bgMusic && !bgMusic.paused) {
+            bgMusic.pause();
+        }
+        
+        // 3. Preparar e iniciar el video
+        revealVideo.muted = false;
+        revealVideo.currentTime = 0;
+        
+        setTimeout(() => {
+            revealVideo.play().catch(err => {
+                console.log("Error al reproducir el video:", err);
+                revealVideo.muted = true;
+                revealVideo.play().catch(e => console.log("Fallback silenciado falló:", e));
+            });
+            
+            // 4. Animar las puertas abriéndose
+            doorLeft.style.transform = "translateX(-100%)";
+            doorRight.style.transform = "translateX(100%)";
+            
+            // Mostrar botón "Saltar" tras 2s
+            setTimeout(() => {
+                const skipBtn = document.getElementById("btn-skip-video");
+                if (skipBtn) {
+                    skipBtn.classList.remove("opacity-0", "pointer-events-none");
+                }
+            }, 2000);
+        }, 100);
+        
+        revealVideo.onended = finalizarRevelacion;
+    }
+    
+    function skipRevealVideo() {
+        const revealVideo = document.getElementById("reveal-video");
+        if (revealVideo) {
+            revealVideo.pause();
+        }
+        finalizarRevelacion();
+    }
+    
+    function finalizarRevelacion() {
+        const doorsOverlay = document.getElementById("doors-overlay");
+        const bgMusic = document.getElementById("bg-music");
+        
+        // 1. Desvanecer el overlay
+        doorsOverlay.style.opacity = "0";
+        
+        // 2. Quitar la bruma/fog de la página principal
+        const blurs = document.querySelectorAll(".intriga-blur");
+        blurs.forEach(el => {
+            el.classList.remove("intriga-blur");
+            el.style.filter = "none";
+            el.style.opacity = "1";
+            el.style.pointerEvents = "auto";
+            el.style.userSelect = "auto";
+        });
+        
+        // Quitar el desenfoque de las coordenadas secretas
+        const coordBlur = document.querySelector(".filter.blur-\\[4px\\]");
+        if (coordBlur) {
+            coordBlur.classList.remove("filter", "blur-[4px]");
+        }
+        
+        // Ocultar el overlay de intriga (Próximamente / Botón)
+        const unlockOverlay = document.getElementById("unlock-overlay");
+        if (unlockOverlay) {
+            unlockOverlay.style.opacity = "0";
+            setTimeout(() => {
+                unlockOverlay.style.display = "none";
+            }, 1000);
+        }
+        
+        // 3. Reanudar música de fondo
+        if (bgMusic) {
+            bgMusic.play().catch(err => console.log("Error al reanudar música:", err));
+        }
+        
+        setTimeout(() => {
+            doorsOverlay.classList.add("hidden");
+            reveal();
+        }, 1500);
+    }
+
+    function toggleMusic() { if (music.paused) { music.play(); } else { music.pause(); } }
+</script>
 </body>
 </html>

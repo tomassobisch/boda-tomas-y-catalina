@@ -100,7 +100,7 @@
             animation: scan 3s infinite linear;
         }
 
-        /* --- PUERTAS Y REVELACIÓN DE VIDEO --- */
+        /* --- REVELACIÓN DE VIDEO --- */
         #doors-overlay {
             position: fixed;
             inset: 0;
@@ -110,52 +110,53 @@
             justify-content: center;
             background-color: #000;
             overflow: hidden;
-            opacity: 1;
+            opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
-        
-        .door {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background-color: #5D3F75;
-            display: flex;
-            align-items: center;
-            z-index: 10;
-            transform: translateX(0);
-            transition: transform 2.5s cubic-bezier(0.7, 0, 0.3, 1);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-        }
-        
-        #door-left {
-            left: 0;
-            justify-content: flex-end;
-            border-right: 2px solid #8BA889;
-        }
-        
-        #door-right {
-            right: 0;
-            justify-content: flex-start;
-            border-left: 2px solid #8BA889;
-        }
-        
-        .door-content {
-            color: #F4F0F7;
-            font-family: 'Playfair Display', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 40px;
-            user-select: none;
-            transition: opacity 1s ease;
-        }
 
-        .door-ornament {
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #8BA889, transparent);
-            margin: 15px 0;
+        /* --- BRUMA DE TRANSICIÓN --- */
+        .mist-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 12000;
+            background: #F4F0F7;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1), visibility 2s;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .mist-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .mist-cloud {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(244,240,247,0.45) 50%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+        .mist-cloud-1 {
+            animation: drift1 25s infinite linear;
+        }
+        .mist-cloud-2 {
+            animation: drift2 30s infinite linear;
+            background: radial-gradient(circle, rgba(220,232,220,0.65) 0%, rgba(244,240,247,0.35) 60%, transparent 80%);
+        }
+        @keyframes drift1 {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(5%, 5%) rotate(180deg) scale(1.1); }
+            100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+        }
+        @keyframes drift2 {
+            0% { transform: translate(0, 0) rotate(360deg) scale(1.1); }
+            50% { transform: translate(-5%, -5%) rotate(180deg) scale(0.95); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1.1); }
         }
     </style>
 </head>
@@ -175,25 +176,14 @@
     </div>
 </div>
 
-<!-- CONTENEDOR DE PUERTAS Y VIDEO DE REVELACIÓN -->
-<div id="doors-overlay" class="hidden">
-    <!-- Puerta Izquierda -->
-    <div id="door-left" class="door">
-        <div class="door-content">
-            <span class="italic text-6xl md:text-8xl opacity-80">C</span>
-            <div class="door-ornament"></div>
-        </div>
-    </div>
-    
-    <!-- Puerta Derecha -->
-    <div id="door-right" class="door">
-        <div class="door-content">
-            <span class="italic text-6xl md:text-8xl opacity-80">T</span>
-            <div class="door-ornament"></div>
-        </div>
-    </div>
+<!-- BRUMA DE TRANSICIÓN -->
+<div id="mist-overlay" class="mist-overlay">
+    <div class="mist-cloud mist-cloud-1"></div>
+    <div class="mist-cloud mist-cloud-2"></div>
+</div>
 
-    <!-- Video de revelación detrás de las puertas -->
+<!-- CONTENEDOR DE VIDEO DE REVELACIÓN -->
+<div id="doors-overlay" class="hidden">
     <div class="relative w-full h-full flex items-center justify-center bg-black z-0">
         <video id="reveal-video" class="w-full h-full max-h-screen object-contain" playsinline src="videos/save the date.mp4"></video>
         
@@ -598,15 +588,66 @@
         function startExperience() {
             if (experienceStarted) return;
             experienceStarted = true;
-            music.volume = 0; 
-            music.play().catch(() => { console.log("Error al reproducir música"); });
-            let vol = 0;
-            const volInterval = setInterval(() => { if (vol < 1) { vol += 0.05; music.volume = Math.min(vol, 1); } else { clearInterval(volInterval); } }, 100);
-            overlay.classList.add('fade-out');
+
+            // 1. Mostrar la bruma de transición
+            const mist = document.getElementById("mist-overlay");
+            if (mist) {
+                mist.classList.add("active");
+            }
+
+            // 2. Bloquear scroll
             document.body.style.overflow = 'hidden';
-            document.getElementById('music-control').style.display = 'block';
-            createLeaves();
-            setTimeout(() => { overlay.style.display = 'none'; reveal(); }, 1800);
+            
+            // 3. Preparar el video de revelación
+            const revealVideo = document.getElementById("reveal-video");
+            const doorsOverlay = document.getElementById("doors-overlay");
+            
+            if (revealVideo) {
+                revealVideo.muted = false;
+                revealVideo.currentTime = 0;
+                
+                revealVideo.onerror = () => {
+                    console.log("Error de video, finalizando...");
+                    finalizarRevelacion();
+                };
+                
+                // 4. Tras 2s (bruma densa), cambiar el video y ocultar la pantalla inicial
+                setTimeout(() => {
+                    // Ocultar pantalla inicial
+                    const overlayEl = document.getElementById("video-overlay");
+                    if (overlayEl) {
+                        overlayEl.style.display = 'none';
+                    }
+                    
+                    // Mostrar contenedor de video
+                    if (doorsOverlay) {
+                        doorsOverlay.classList.remove("hidden");
+                        doorsOverlay.offsetHeight; // Forzar reflow
+                        doorsOverlay.style.opacity = "1";
+                    }
+                    
+                    revealVideo.play().catch(err => {
+                        console.log("Error al reproducir video:", err);
+                        revealVideo.muted = true;
+                        revealVideo.play().catch(e => console.log("Fallback silenciado falló:", e));
+                    });
+                    
+                    // Mostrar botón "Saltar" tras 2s
+                    setTimeout(() => {
+                        const skipBtn = document.getElementById("btn-skip-video");
+                        if (skipBtn) {
+                            skipBtn.classList.remove("opacity-0", "pointer-events-none");
+                        }
+                    }, 2000);
+
+                    // Desvanecer la bruma para revelar el video
+                    if (mist) {
+                        mist.classList.remove("active");
+                    }
+                }, 2000);
+                
+                revealVideo.onended = finalizarRevelacion;
+            }
         }
 
         function createLeaves() {
@@ -773,74 +814,12 @@
         
         updateCountdown();
         const countdownInterval = setInterval(updateCountdown, 1000);
-        // Control global de clics en la pantalla para iniciar y desbloquear
+        // Control global de clics en la pantalla para iniciar
         window.addEventListener("click", (e) => {
             if (!experienceStarted) {
                 startExperience();
-                return;
             }
-            if (historyUnlocked) return;
-            
-            // Ignorar clics si son en controles de música, códigos de damas/testigos/caballeros
-            if (e.target.closest("#music-control") || e.target.closest("input") || e.target.closest("button:not(.btn-comencemos)")) {
-                return;
-            }
-            
-            desbloquearHistoria();
         });
-    
-    let historyUnlocked = false;
-    function desbloquearHistoria() {
-        if (historyUnlocked) return;
-        historyUnlocked = true;
-        
-        const doorsOverlay = document.getElementById("doors-overlay");
-        const doorLeft = document.getElementById("door-left");
-        const doorRight = document.getElementById("door-right");
-        const revealVideo = document.getElementById("reveal-video");
-        const bgMusic = document.getElementById("bg-music");
-        
-        // 1. Mostrar el contenedor de las puertas
-        doorsOverlay.classList.remove("hidden");
-        doorsOverlay.style.opacity = "1";
-        
-        // 2. Pausar la música de fondo
-        if (bgMusic && !bgMusic.paused) {
-            bgMusic.pause();
-        }
-        
-        // 3. Preparar e iniciar el video
-        revealVideo.muted = false;
-        revealVideo.currentTime = 0;
-        
-        // Manejador por si el video no carga o tiene un error
-        revealVideo.onerror = () => {
-            console.log("Error de video, desbloqueando directamente...");
-            finalizarRevelacion();
-        };
-        
-        setTimeout(() => {
-            revealVideo.play().catch(err => {
-                console.log("Error al reproducir el video:", err);
-                revealVideo.muted = true;
-                revealVideo.play().catch(e => console.log("Fallback silenciado falló:", e));
-            });
-            
-            // 4. Animar las puertas abriéndose
-            doorLeft.style.transform = "translateX(-100%)";
-            doorRight.style.transform = "translateX(100%)";
-            
-            // Mostrar botón "Saltar" tras 2s
-            setTimeout(() => {
-                const skipBtn = document.getElementById("btn-skip-video");
-                if (skipBtn) {
-                    skipBtn.classList.remove("opacity-0", "pointer-events-none");
-                }
-            }, 2000);
-        }, 100);
-        
-        revealVideo.onended = finalizarRevelacion;
-    }
     
     function skipRevealVideo() {
         const revealVideo = document.getElementById("reveal-video");
@@ -853,47 +832,83 @@
     function finalizarRevelacion() {
         const doorsOverlay = document.getElementById("doors-overlay");
         const bgMusic = document.getElementById("bg-music");
+        const mist = document.getElementById("mist-overlay");
         
-        // 1. Desvanecer el overlay
-        doorsOverlay.style.opacity = "0";
+        if (!mist) return;
         
-        // 2. Quitar la bruma/fog de la página principal
-        const blurs = document.querySelectorAll(".intriga-blur");
-        blurs.forEach(el => {
-            el.classList.remove("intriga-blur");
-            el.style.filter = "none";
-            el.style.opacity = "1";
-            el.style.pointerEvents = "auto";
-            el.style.userSelect = "auto";
-        });
+        // 1. Mostrar la bruma de transición
+        mist.classList.add("active");
         
-        // Quitar el desenfoque de las coordenadas secretas
-        const coordBlur = document.querySelector(".filter.blur-\\[4px\\]");
-        if (coordBlur) {
-            coordBlur.classList.remove("filter", "blur-[4px]");
-        }
-        
-        // Ocultar el overlay de intriga (Próximamente / Botón)
-        const unlockOverlay = document.getElementById("unlock-overlay");
-        if (unlockOverlay) {
-            unlockOverlay.style.opacity = "0";
-            setTimeout(() => {
-                unlockOverlay.style.display = "none";
-            }, 1000);
-        }
-        
-        // Habilitar scroll de página al desbloquear
-        document.body.style.overflow = 'auto';
-        
-        // 3. Reanudar música de fondo
-        if (bgMusic) {
-            bgMusic.play().catch(err => console.log("Error al reanudar música:", err));
-        }
-        
+        // 2. Tras 2s (bruma densa), ocultar el video y revelar el landing
         setTimeout(() => {
-            doorsOverlay.classList.add("hidden");
-            reveal();
-        }, 1500);
+            const revealVideo = document.getElementById("reveal-video");
+            if (revealVideo) {
+                revealVideo.pause();
+            }
+            
+            // Ocultar contenedor de video
+            if (doorsOverlay) {
+                doorsOverlay.style.opacity = "0";
+                doorsOverlay.classList.add("hidden");
+            }
+            
+            // Quitar el desenfoque/bruma del landing
+            const blurs = document.querySelectorAll(".intriga-blur");
+            blurs.forEach(el => {
+                el.classList.remove("intriga-blur");
+                el.style.filter = "none";
+                el.style.opacity = "1";
+                el.style.pointerEvents = "auto";
+                el.style.userSelect = "auto";
+            });
+            
+            // Quitar el desenfoque de las coordenadas
+            const coordBlur = document.querySelector(".filter.blur-\\[4px\\]");
+            if (coordBlur) {
+                coordBlur.classList.remove("filter", "blur-[4px]");
+            }
+            
+            // Ocultar el overlay de intriga (lock screen) por completo
+            const unlockOverlay = document.getElementById("unlock-overlay");
+            if (unlockOverlay) {
+                unlockOverlay.style.display = "none";
+            }
+            
+            // Habilitar scroll
+            document.body.style.overflow = 'auto';
+            
+            // Iniciar música de fondo
+            const musicPlaylist = ["musica/Lover - Taylor Swift - Wedding Violin Performance.mp3", "musica/Ojitos Lindos (Piano Instrumental).mp3"];
+            if (bgMusic) {
+                if (!bgMusic.src) {
+                    bgMusic.src = musicPlaylist[Math.floor(Math.random() * musicPlaylist.length)];
+                }
+                bgMusic.volume = 0;
+                bgMusic.play().catch(err => console.log("Error al reproducir música:", err));
+                let vol = 0;
+                const volInterval = setInterval(() => {
+                    if (vol < 1) {
+                        vol += 0.05;
+                        bgMusic.volume = Math.min(vol, 1);
+                    } else {
+                        clearInterval(volInterval);
+                    }
+                }, 100);
+            }
+            
+            const musicCtrl = document.getElementById('music-control');
+            if (musicCtrl) {
+                musicCtrl.style.display = 'block';
+            }
+            createLeaves();
+            
+            // Desvanecer la bruma para mostrar el landing
+            setTimeout(() => {
+                mist.classList.remove("active");
+                reveal();
+            }, 100);
+            
+        }, 2000);
     }
 
     function toggleMusic() { if (music.paused) { music.play(); } else { music.pause(); } }

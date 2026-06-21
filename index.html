@@ -484,13 +484,18 @@
                     <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#8BA889] to-transparent animate-scan"></div>
 
                     <div class="space-y-6">
-                        <p class="serif italic text-xl md:text-2xl text-gray-400 select-none filter blur-[4px]">32° 53' 45.2" S 68° 49' 12.8" W</p>
-                        <div class="flex justify-center space-x-2 opacity-30">
-                            <span class="w-2 h-2 rounded-full bg-[#5D3F75]"></span>
-                            <span class="w-2 h-2 rounded-full bg-[#5D3F75]"></span>
-                            <span class="w-2 h-2 rounded-full bg-[#5D3F75]"></span>
+                        <h3 class="serif italic text-2xl md:text-3xl text-gray-800 font-semibold tracking-wide">La Carmelia</h3>
+                        <p class="text-[#8BA889] font-medium text-sm md:text-base">Ruta Provincial C45, Km 8.5, Córdoba</p>
+                        <p class="serif italic text-lg md:text-xl text-gray-400 select-none transition-all duration-500 hover:text-gray-600">31° 31' 26.1" S &nbsp; 64° 26' 57.6" W</p>
+                        <div class="flex justify-center space-x-2 opacity-35">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
                         </div>
-                        <p class="text-gray-600 font-light text-sm md:text-base px-4">Un rincón escondido donde el destino nos aguarda... Solo los corazones preparados encontrarán el camino.</p>
+                        <p class="text-gray-600 font-light text-sm md:text-base px-4 leading-relaxed">
+                            Un rincón rodeado de naturaleza en Córdoba donde celebraremos nuestra unión. 
+                            ¡Acompáñanos a escribir este nuevo capítulo de nuestra historia!
+                        </p>
                     </div>
 
                     <button onclick="revelarMensajeUbicacion()" class="mt-10 btn-comencemos !border-[#8BA889] !text-[#8BA889] hover:!bg-[#8BA889] hover:!text-white">Explorar Coordenadas</button>
@@ -586,7 +591,7 @@
         }
 
         function revelarMensajeUbicacion() {
-            alert("El mapa se está dibujando... el destino aparecerá pronto en tu brújula.");
+            window.open("https://maps.app.goo.gl/6nJjpwdiM19t8GZm6", "_blank");
         }
 
         function reveal() {

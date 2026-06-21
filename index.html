@@ -164,15 +164,28 @@
 
     <div id="leaf-container"></div>
 <div id="video-overlay" onclick="startExperience()" class="cursor-pointer">
-    <video id="bg-video-1" class="intro-bg-video" playsinline muted autoplay loop src="videos/save the date.mp4"></video>
+    <!-- Video de fondo borroso -->
+    <video id="bg-video-blur" class="intro-bg-video filter blur-xl opacity-50 scale-110" playsinline muted autoplay loop src="videos/save the date.mp4"></video>
     <div class="fume-layer"></div>
-    <div class="intro-ui">
-        <div class="px-4">
-            <p class="uppercase font-light" style="color: white; letter-spacing: 0.3em; font-size: 0.6rem; margin-bottom: 1.5rem; md:letter-spacing: 0.5em; md:font-size: 0.7rem;">Nuestra historia comienza aquí</p>
-            <h2 class="serif italic text-6xl md:text-9xl" style="color: white;">C & T</h2>
-            <div class="w-8 h-[1px] bg-white/60 mx-auto mt-8 mb-8 md:w-12 md:mt-12 md:mb-12"></div>
+    <div class="intro-ui w-full h-full flex flex-col justify-between items-center py-10 z-10">
+        <!-- Superior -->
+        <div class="px-4 text-center">
+            <p class="uppercase font-light" style="color: white; letter-spacing: 0.3em; font-size: 0.6rem; margin-bottom: 1rem; md:letter-spacing: 0.5em; md:font-size: 0.7rem;">Nuestra historia comienza aquí</p>
+            <h2 class="serif italic text-6xl md:text-8xl" style="color: white;">C & T</h2>
+            <div class="w-8 h-[1px] bg-white/60 mx-auto mt-4 mb-4 md:w-12"></div>
         </div>
-        <button class="btn-comencemos">Comencemos</button>
+
+        <!-- Video principal centrado y completo (16:9) -->
+        <div class="w-full max-w-3xl px-6 my-auto">
+            <div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/20 bg-black">
+                <video id="bg-video-1" class="w-full h-full object-contain" playsinline muted autoplay loop src="videos/save the date.mp4"></video>
+            </div>
+        </div>
+
+        <!-- Inferior -->
+        <div class="px-4 text-center">
+            <button class="btn-comencemos shadow-lg hover:scale-105 active:scale-95">Comencemos</button>
+        </div>
     </div>
 </div>
 
@@ -464,11 +477,16 @@
 
     <script>
         const video1 = document.getElementById("bg-video-1");
+        const videoBlur = document.getElementById("bg-video-blur");
         const music = document.getElementById("bg-music");
         
         // Dejar solo el video 3 fijo (ahora el save the date)
         video1.src = "videos/save the date.mp4"; 
         video1.play().catch(() => { console.log("Auto-play prevenido por el navegador"); });
+        if (videoBlur) {
+            videoBlur.src = "videos/save the date.mp4";
+            videoBlur.play().catch(() => {});
+        }
         createLeaves();
 
         const musicPlaylist = ["musica/Lover - Taylor Swift - Wedding Violin Performance.mp3", "musica/Ojitos Lindos (Piano Instrumental).mp3"];

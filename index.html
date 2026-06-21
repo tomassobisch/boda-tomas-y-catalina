@@ -229,14 +229,14 @@
                     <!-- Foto Izquierda Fondo -->
                     <div class="absolute left-2 md:left-6 w-40 h-52 md:w-52 md:h-68 transform -rotate-12 translate-y-4 hover:-rotate-6 hover:scale-105 transition-all duration-500 z-10">
                         <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <img src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg" class="w-full h-full object-cover" alt="Playa Izquierda">
+                            <img id="img-polaroid-left" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg" class="w-full h-full object-cover" alt="Playa Izquierda">
                         </div>
                     </div>
                     
                     <!-- Foto Derecha Fondo -->
                     <div class="absolute right-2 md:right-6 w-40 h-52 md:w-52 md:h-68 transform rotate-12 translate-y-6 hover:rotate-6 hover:scale-105 transition-all duration-500 z-10">
                         <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <img src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (3).jpeg" class="w-full h-full object-cover" alt="Playa Derecha">
+                            <img id="img-polaroid-right" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (3).jpeg" class="w-full h-full object-cover" alt="Playa Derecha">
                         </div>
                     </div>
                     
@@ -244,12 +244,9 @@
                     <div class="absolute w-48 h-60 md:w-60 md:h-76 transform rotate-2 -translate-y-4 hover:rotate-0 hover:scale-105 transition-all duration-500 z-20 group">
                         <div class="photo-frame bg-white p-2 md:p-3 pb-8 md:pb-10 shadow-xl relative h-full flex flex-col">
                             <!-- Contenedor del Slideshow -->
-                            <div class="relative flex-1 overflow-hidden bg-gray-50">
-                                <img id="slide-img-1" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Slide 1">
-                                <img id="slide-img-2" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (2).jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 2">
-                                <img id="slide-img-3" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (4).jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 3">
-                                <img id="slide-img-4" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.26.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 4">
-                                <img id="slide-img-5" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.26 (1).jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 5">
+                            <div id="slideshow-container" class="relative flex-1 overflow-hidden bg-gray-50">
+                                <img id="slide-active" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Slide Active">
+                                <img id="slide-next" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide Next">
                             </div>
                             
                             <!-- Controles del Slideshow -->
@@ -505,55 +502,109 @@
         }
         window.addEventListener("scroll", reveal);
         
-        // Slideshow para el collage de fotos de la playa
-        let currentSlide = 1;
-        const totalSlides = 5;
+        // Listado de todas las fotos de recuerdos (18 fotos en total)
+        const photoList = [
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg",
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg",
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (2).jpeg",
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (3).jpeg",
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (4).jpeg",
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.26.jpeg",
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.26 (1).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 22.58.40 (1).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02.jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (1).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (2).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (3).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (4).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03.jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (1).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (2).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (3).jpeg",
+            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (4).jpeg"
+        ];
+        
+        let currentPhotoIndex = 0;
+        let isTransitioning = false;
         let slideInterval;
         
-        function showSlide(index) {
-            for (let i = 1; i <= totalSlides; i++) {
-                const img = document.getElementById(`slide-img-${i}`);
-                if (img) {
-                    if (i === index) {
-                        img.style.opacity = '1';
-                        img.style.zIndex = '1';
-                    } else {
-                        img.style.opacity = '0';
-                        img.style.zIndex = '0';
-                    }
-                }
+        function initSlideshow() {
+            // Inicializar foto central
+            const activeImg = document.getElementById("slide-active");
+            if (activeImg && photoList.length > 0) {
+                activeImg.src = photoList[0];
             }
-            currentSlide = index;
+            
+            // Asignar fotos aleatorias no repetidas a las fotos de fondo (izquierda y derecha)
+            const leftImg = document.getElementById("img-polaroid-left");
+            const rightImg = document.getElementById("img-polaroid-right");
+            if (leftImg && rightImg && photoList.length >= 2) {
+                const randLeft = Math.floor(Math.random() * photoList.length);
+                let randRight = Math.floor(Math.random() * photoList.length);
+                while (randRight === randLeft) {
+                    randRight = Math.floor(Math.random() * photoList.length);
+                }
+                leftImg.src = photoList[randLeft];
+                rightImg.src = photoList[randRight];
+            }
+        }
+        
+        function changeSlide(direction) {
+            if (isTransitioning || photoList.length <= 1) return;
+            isTransitioning = true;
+            
+            const activeImg = document.getElementById("slide-active");
+            const nextImg = document.getElementById("slide-next");
+            if (!activeImg || !nextImg) return;
+            
+            let nextIndex = currentPhotoIndex + direction;
+            if (nextIndex >= photoList.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = photoList.length - 1;
+            
+            nextImg.src = photoList[nextIndex];
+            nextImg.style.opacity = '0';
+            nextImg.style.zIndex = '2';
+            activeImg.style.zIndex = '1';
+            
+            setTimeout(() => {
+                nextImg.style.opacity = '1';
+                
+                setTimeout(() => {
+                    activeImg.src = photoList[nextIndex];
+                    nextImg.style.opacity = '0';
+                    nextImg.style.zIndex = '0';
+                    activeImg.style.zIndex = '1';
+                    currentPhotoIndex = nextIndex;
+                    isTransitioning = false;
+                }, 1000);
+            }, 50);
         }
         
         function nextSlide(event) {
             if (event) event.stopPropagation();
-            let next = currentSlide + 1;
-            if (next > totalSlides) next = 1;
-            showSlide(next);
+            changeSlide(1);
             resetSlideTimer();
         }
         
         function prevSlide(event) {
             if (event) event.stopPropagation();
-            let prev = currentSlide - 1;
-            if (prev < 1) prev = totalSlides;
-            showSlide(prev);
+            changeSlide(-1);
             resetSlideTimer();
         }
         
         function startSlideTimer() {
             slideInterval = setInterval(() => {
-                nextSlide();
+                changeSlide(1);
             }, 3500);
         }
         
-        // Evitar múltiples intervalos
         function resetSlideTimer() {
             clearInterval(slideInterval);
             startSlideTimer();
         }
         
+        // Ejecutar inicialización e iniciar timer
+        initSlideshow();
         startSlideTimer();
         // Control global de clics en la pantalla para iniciar y desbloquear
         window.addEventListener("click", (e) => {

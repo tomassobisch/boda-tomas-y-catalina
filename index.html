@@ -480,25 +480,77 @@
                 <h2 class="serif italic text-4xl md:text-6xl accent-color mb-6">El Escenario Secreto</h2>
                 <p class="text-gray-500 font-light tracking-[0.2em] uppercase text-xs mb-12">Donde nuestra historia se hará eterna</p>
 
-                <div class="relative bg-white/50 backdrop-blur-sm p-8 md:p-12 rounded-sm border border-white inline-block w-full max-w-2xl shadow-xl overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#8BA889] to-transparent animate-scan"></div>
-
-                    <div class="space-y-6">
-                        <h3 class="serif italic text-2xl md:text-3xl text-gray-800 font-semibold tracking-wide">La Carmelia</h3>
-                        <p class="text-[#8BA889] font-medium text-sm md:text-base">Ruta Provincial C45, Km 8.5, Córdoba</p>
-                        <p class="serif italic text-lg md:text-xl text-gray-400 select-none transition-all duration-500 hover:text-gray-600">31° 31' 26.1" S &nbsp; 64° 26' 57.6" W</p>
-                        <div class="flex justify-center space-x-2 opacity-35">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                <!-- TARJETAS DE UBICACIÓN (CEREMONIA & CELEBRACIÓN) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto mt-12 text-center relative z-20">
+                    
+                    <!-- CARD 1: LA CEREMONIA (IGLESIA) -->
+                    <div class="relative bg-white/60 backdrop-blur-md rounded-sm border border-white shadow-xl overflow-hidden flex flex-col justify-between h-full transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#8BA889] to-transparent animate-scan"></div>
+                        
+                        <div>
+                            <!-- Foto de la Iglesia -->
+                            <div class="w-full h-56 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-[#5D3F75]/5 z-10 pointer-events-none"></div>
+                                <img src="imagenes/la_merced_church.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out" alt="Parroquia Nuestra Señora de La Merced">
+                            </div>
+                            
+                            <div class="p-6 md:p-8 space-y-4">
+                                <p class="text-gray-500 font-light tracking-[0.2em] uppercase text-[10px]">La Ceremonia</p>
+                                <h3 class="serif italic text-2xl md:text-3xl text-gray-800 font-semibold">Nuestra Señora de La Merced</h3>
+                                <p class="text-[#8BA889] font-medium text-xs md:text-sm">Nieto esq. Manuel Solares, Alta Gracia, Córdoba</p>
+                                <p class="serif italic text-sm text-gray-400 select-none transition-all duration-500 hover:text-gray-600">31° 39' 28.7" S &nbsp; 64° 26' 14.3" W</p>
+                                
+                                <div class="flex justify-center space-x-2 opacity-35 my-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                                </div>
+                                
+                                <p class="text-gray-600 font-light text-sm px-4 leading-relaxed">
+                                    Aquí, ante el altar de este templo histórico y rodeados de nuestros seres queridos, nos daremos el "sí" definitivo para toda la vida.
+                                </p>
+                            </div>
                         </div>
-                        <p class="text-gray-600 font-light text-sm md:text-base px-4 leading-relaxed">
-                            Un rincón rodeado de naturaleza en Córdoba donde celebraremos nuestra unión. 
-                            ¡Acompáñanos a escribir este nuevo capítulo de nuestra historia!
-                        </p>
+                        
+                        <div class="pb-8 px-6">
+                            <button onclick="revelarCeremonia()" class="btn-comencemos w-full !border-[#8BA889] !text-[#8BA889] hover:!bg-[#8BA889] hover:!text-white">Explorar Ceremonia</button>
+                        </div>
                     </div>
 
-                    <button onclick="revelarMensajeUbicacion()" class="mt-10 btn-comencemos !border-[#8BA889] !text-[#8BA889] hover:!bg-[#8BA889] hover:!text-white">Explorar Coordenadas</button>
+                    <!-- CARD 2: LA CELEBRACIÓN (SALÓN) -->
+                    <div class="relative bg-white/60 backdrop-blur-md rounded-sm border border-white shadow-xl overflow-hidden flex flex-col justify-between h-full transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#8BA889] to-transparent animate-scan"></div>
+                        
+                        <div>
+                            <!-- Foto del Salón -->
+                            <div class="w-full h-56 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-[#5D3F75]/5 z-10 pointer-events-none"></div>
+                                <img src="imagenes/la_carmelia_salon.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out" alt="Salón La Carmelia">
+                            </div>
+                            
+                            <div class="p-6 md:p-8 space-y-4">
+                                <p class="text-gray-500 font-light tracking-[0.2em] uppercase text-[10px]">La Fiesta</p>
+                                <h3 class="serif italic text-2xl md:text-3xl text-gray-800 font-semibold">Salón La Carmelia</h3>
+                                <p class="text-[#8BA889] font-medium text-xs md:text-sm">Ruta Provincial C45, Km 8.5, Córdoba</p>
+                                <p class="serif italic text-sm text-gray-400 select-none transition-all duration-500 hover:text-gray-600">31° 31' 26.1" S &nbsp; 64° 26' 57.6" W</p>
+                                
+                                <div class="flex justify-center space-x-2 opacity-35 my-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#5D3F75]"></span>
+                                </div>
+                                
+                                <p class="text-gray-600 font-light text-sm px-4 leading-relaxed">
+                                    Una velada rodeada de naturaleza y magia donde festejaremos, brindaremos y bailaremos hasta que el sol aparezca.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="pb-8 px-6">
+                            <button onclick="revelarCelebracion()" class="btn-comencemos w-full !border-[#8BA889] !text-[#8BA889] hover:!bg-[#8BA889] hover:!text-white">Explorar Celebración</button>
+                        </div>
+                    </div>
+
                 </div>
                 </div>
                 </section>
@@ -590,7 +642,11 @@
             }
         }
 
-        function revelarMensajeUbicacion() {
+        function revelarCeremonia() {
+            window.open("https://maps.app.goo.gl/3uxEeH52hYGGCT219", "_blank");
+        }
+
+        function revelarCelebracion() {
             window.open("https://maps.app.goo.gl/6nJjpwdiM19t8GZm6", "_blank");
         }
 

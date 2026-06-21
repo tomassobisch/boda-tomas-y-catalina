@@ -123,6 +123,7 @@
             display: flex;
             align-items: center;
             z-index: 10;
+            transform: translateX(0);
             transition: transform 2.5s cubic-bezier(0.7, 0, 0.3, 1);
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
@@ -413,7 +414,7 @@
             let vol = 0;
             const volInterval = setInterval(() => { if (vol < 1) { vol += 0.05; music.volume = Math.min(vol, 1); } else { clearInterval(volInterval); } }, 100);
             overlay.classList.add('fade-out');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'hidden';
             document.getElementById('music-control').style.display = 'block';
             createLeaves();
             setTimeout(() => { overlay.style.display = 'none'; reveal(); }, 1800);
@@ -465,6 +466,22 @@
             }
         }
         window.addEventListener("scroll", reveal);
+        
+        // Control global de clics en la pantalla para iniciar y desbloquear
+        window.addEventListener("click", (e) => {
+            if (!experienceStarted) {
+                startExperience();
+                return;
+            }
+            if (historyUnlocked) return;
+            
+            // Ignorar clics si son en controles de música, códigos de damas/testigos/caballeros
+            if (e.target.closest("#music-control") || e.target.closest("input") || e.target.closest("button:not(.btn-comencemos)")) {
+                return;
+            }
+            
+            desbloquearHistoria();
+        });
     
     let historyUnlocked = false;
     function desbloquearHistoria() {
@@ -489,6 +506,12 @@
         // 3. Preparar e iniciar el video
         revealVideo.muted = false;
         revealVideo.currentTime = 0;
+        
+        // Manejador por si el video no carga o tiene un error
+        revealVideo.onerror = () => {
+            console.log("Error de video, desbloqueando directamente...");
+            finalizarRevelacion();
+        };
         
         setTimeout(() => {
             revealVideo.play().catch(err => {
@@ -552,6 +575,9 @@
                 unlockOverlay.style.display = "none";
             }, 1000);
         }
+        
+        // Habilitar scroll de página al desbloquear
+        document.body.style.overflow = 'auto';
         
         // 3. Reanudar música de fondo
         if (bgMusic) {

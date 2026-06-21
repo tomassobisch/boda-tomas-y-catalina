@@ -38,7 +38,7 @@
         /* --- ESCENA INICIAL --- */
         #video-overlay {
             position: fixed; inset: 0; z-index: 9999; background-color: #000;
-            background-image: url('imagenes/WhatsApp Image 2026-02-28 at 23.26.16.jpeg');
+            background-image: url('imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.8s;
@@ -164,22 +164,13 @@
 
     <div id="leaf-container"></div>
 <div id="video-overlay" onclick="startExperience()" class="cursor-pointer">
-    <!-- Video de fondo borroso -->
-    <video id="bg-video-blur" class="intro-bg-video filter blur-xl opacity-50 scale-110" playsinline muted autoplay loop src="videos/save the date.mp4"></video>
     <div class="fume-layer"></div>
-    <div class="intro-ui w-full h-full flex flex-col justify-between items-center py-10 z-10">
+    <div class="intro-ui w-full h-full flex flex-col justify-between items-center py-20 md:py-32 z-10">
         <!-- Superior -->
         <div class="px-4 text-center">
             <p class="uppercase font-light" style="color: white; letter-spacing: 0.3em; font-size: 0.6rem; margin-bottom: 1rem; md:letter-spacing: 0.5em; md:font-size: 0.7rem;">Nuestra historia comienza aquí</p>
             <h2 class="serif italic text-6xl md:text-8xl" style="color: white;">C & T</h2>
             <div class="w-8 h-[1px] bg-white/60 mx-auto mt-4 mb-4 md:w-12"></div>
-        </div>
-
-        <!-- Video principal centrado y completo (16:9) -->
-        <div class="w-[75%] md:w-full max-w-2xl mx-auto my-auto">
-            <div class="relative w-full aspect-video">
-                <video id="bg-video-1" class="w-full h-full object-contain rounded-xl shadow-2xl" playsinline muted autoplay loop src="videos/save the date.mp4"></video>
-            </div>
         </div>
 
         <!-- Inferior -->
@@ -476,17 +467,7 @@
     </main>
 
     <script>
-        const video1 = document.getElementById("bg-video-1");
-        const videoBlur = document.getElementById("bg-video-blur");
         const music = document.getElementById("bg-music");
-        
-        // Dejar solo el video 3 fijo (ahora el save the date)
-        video1.src = "videos/save the date.mp4"; 
-        video1.play().catch(() => { console.log("Auto-play prevenido por el navegador"); });
-        if (videoBlur) {
-            videoBlur.src = "videos/save the date.mp4";
-            videoBlur.play().catch(() => {});
-        }
         createLeaves();
 
         const musicPlaylist = ["musica/Lover - Taylor Swift - Wedding Violin Performance.mp3", "musica/Ojitos Lindos (Piano Instrumental).mp3"];

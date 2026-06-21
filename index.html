@@ -223,62 +223,48 @@
             <div class="intriga-blur text-center w-full h-full flex flex-col items-center justify-center py-6">
                 <h1 class="text-4xl md:text-8xl mb-4 md:mb-6 serif italic accent-color">Catalina & Tomás</h1>
                 
-                <!-- CONTENEDOR DE COLLAGE DE PLAYA -->
-                <div class="relative w-full max-w-lg mx-auto h-[380px] md:h-[480px] mt-4 flex items-center justify-center select-none">
-                    
-                    <!-- Foto Far Left Fondo -->
-                    <div class="absolute left-2 md:left-4 w-32 h-44 md:w-44 md:h-58 transform -rotate-12 translate-y-6 hover:-rotate-6 hover:scale-105 transition-all duration-500 z-10">
-                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
-                                <img id="polaroid-img-1" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 1">
+                <!-- CONTENEDOR DE COLLAGE DE PLAYA (UNO AL LADO DEL OTRO) -->
+                <div class="relative w-full max-w-6xl mx-auto mt-6 px-4 select-none">
+                    <div class="grid grid-cols-2 md:flex md:flex-row gap-4 md:gap-6 justify-center items-center">
+                        
+                        <!-- Foto 1 (Izquierda) -->
+                        <div class="w-full md:w-44 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                            <div class="photo-frame bg-white p-2 pb-6 shadow-md">
+                                <img src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg" class="w-full h-36 md:h-48 object-cover" alt="Playa 1">
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Foto Mid Left Fondo -->
-                    <div class="absolute left-10 md:left-20 w-34 h-46 md:w-46 md:h-60 transform -rotate-6 translate-y-2 hover:-rotate-2 hover:scale-105 transition-all duration-500 z-15">
-                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
-                                <img id="polaroid-img-2" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 2">
+                        
+                        <!-- Foto 2 (Centro-Izquierda) -->
+                        <div class="w-full md:w-44 transform rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                            <div class="photo-frame bg-white p-2 pb-6 shadow-md">
+                                <img src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg" class="w-full h-36 md:h-48 object-cover" alt="Playa 2">
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Foto Far Right Fondo -->
-                    <div class="absolute right-2 md:right-4 w-32 h-44 md:w-44 md:h-58 transform rotate-12 translate-y-8 hover:rotate-6 hover:scale-105 transition-all duration-500 z-10">
-                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
-                                <img id="polaroid-img-4" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 4">
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Foto Mid Right Fondo -->
-                    <div class="absolute right-10 md:right-20 w-34 h-46 md:w-46 md:h-60 transform rotate-6 translate-y-4 hover:rotate-2 hover:scale-105 transition-all duration-500 z-15">
-                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
-                                <img id="polaroid-img-3" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 3">
+                        <!-- Foto 3 (Centro-Derecha - Slideshow) -->
+                        <div class="w-full md:w-48 transform -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 group">
+                            <div class="photo-frame bg-white p-2 pb-8 shadow-lg relative flex flex-col h-full">
+                                <div id="slideshow-container" class="relative w-full h-36 md:h-52 overflow-hidden bg-gray-50">
+                                    <img id="slide-active" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Slide Active">
+                                    <img id="slide-next" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide Next">
+                                </div>
+                                <!-- Controles del Slideshow -->
+                                <button onclick="prevSlide(event)" class="absolute left-3 top-[40%] -translate-y-1/2 bg-white/80 hover:bg-white text-[#5D3F75] p-1 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                                </button>
+                                <button onclick="nextSlide(event)" class="absolute right-3 top-[40%] -translate-y-1/2 bg-white/80 hover:bg-white text-[#5D3F75] p-1 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Foto Central Interactiva (Slideshow) -->
-                    <div class="absolute w-44 h-56 md:w-56 md:h-72 transform rotate-2 -translate-y-4 hover:rotate-0 hover:scale-105 transition-all duration-500 z-20 group">
-                        <div class="photo-frame bg-white p-2 md:p-3 pb-8 md:pb-10 shadow-xl relative h-full flex flex-col">
-                            <!-- Contenedor del Slideshow -->
-                            <div id="slideshow-container" class="relative flex-1 overflow-hidden bg-gray-50">
-                                <img id="slide-active" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Slide Active">
-                                <img id="slide-next" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide Next">
+                        
+                        <!-- Foto 4 (Derecha) -->
+                        <div class="w-full md:w-44 transform rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                            <div class="photo-frame bg-white p-2 pb-6 shadow-md">
+                                <img src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (3).jpeg" class="w-full h-36 md:h-48 object-cover" alt="Playa 4">
                             </div>
-                            
-                            <!-- Controles del Slideshow -->
-                            <button onclick="prevSlide(event)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#5D3F75] p-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-                            </button>
-                            <button onclick="nextSlide(event)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#5D3F75] p-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                            </button>
                         </div>
+                        
                     </div>
                     
                 </div>
@@ -613,49 +599,30 @@
         }
         window.addEventListener("scroll", reveal);
         
-        const photoList = [
+        // Listado de fotos exclusivas de la playa para el slideshow central (7 fotos)
+        const beachPhotos = [
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg",
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg",
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (2).jpeg",
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (3).jpeg",
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (4).jpeg",
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.26.jpeg",
-            "imagenes/WhatsApp Image 2026-06-21 at 17.10.26 (1).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 22.58.40 (1).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02.jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (1).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (2).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (3).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.02 (4).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03.jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (1).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (2).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (3).jpeg",
-            "imagenes/WhatsApp Image 2026-02-28 at 23.03.03 (4).jpeg"
+            "imagenes/WhatsApp Image 2026-06-21 at 17.10.26 (1).jpeg"
         ];
         
         let currentPhotoIndex = 0;
         let isTransitioning = false;
         let slideInterval;
-        let bgInterval;
-        let activeImages = [0, 1, 2, 3, 4];
         
         function initSlideshow() {
-            let shuffledIndices = Array.from({length: photoList.length}, (_, i) => i);
-            shuffledIndices.sort(() => Math.random() - 0.5);
-            activeImages = shuffledIndices.slice(0, 5);
-            
-            document.getElementById("slide-active").src = photoList[activeImages[0]];
-            document.getElementById("polaroid-img-1").src = photoList[activeImages[1]];
-            document.getElementById("polaroid-img-2").src = photoList[activeImages[2]];
-            document.getElementById("polaroid-img-3").src = photoList[activeImages[3]];
-            document.getElementById("polaroid-img-4").src = photoList[activeImages[4]];
-            
-            currentPhotoIndex = activeImages[0];
+            const activeImg = document.getElementById("slide-active");
+            if (activeImg && beachPhotos.length > 0) {
+                activeImg.src = beachPhotos[0];
+            }
         }
         
         function changeSlide(direction) {
-            if (isTransitioning || photoList.length <= 1) return;
+            if (isTransitioning || beachPhotos.length <= 1) return;
             isTransitioning = true;
             
             const activeImg = document.getElementById("slide-active");
@@ -663,12 +630,10 @@
             if (!activeImg || !nextImg) return;
             
             let nextIndex = currentPhotoIndex + direction;
-            if (nextIndex >= photoList.length) nextIndex = 0;
-            if (nextIndex < 0) nextIndex = photoList.length - 1;
+            if (nextIndex >= beachPhotos.length) nextIndex = 0;
+            if (nextIndex < 0) nextIndex = beachPhotos.length - 1;
             
-            activeImages[0] = nextIndex;
-            
-            nextImg.src = photoList[nextIndex];
+            nextImg.src = beachPhotos[nextIndex];
             nextImg.style.opacity = '0';
             nextImg.style.zIndex = '2';
             activeImg.style.zIndex = '1';
@@ -677,7 +642,7 @@
                 nextImg.style.opacity = '1';
                 
                 setTimeout(() => {
-                    activeImg.src = photoList[nextIndex];
+                    activeImg.src = beachPhotos[nextIndex];
                     nextImg.style.opacity = '0';
                     nextImg.style.zIndex = '0';
                     activeImg.style.zIndex = '1';
@@ -685,32 +650,6 @@
                     isTransitioning = false;
                 }, 1000);
             }, 50);
-        }
-        
-        function rotateBackgroundPolaroid() {
-            if (photoList.length <= 5) return;
-            const targetPos = Math.floor(Math.random() * 4) + 1;
-            const targetImg = document.getElementById(`polaroid-img-${targetPos}`);
-            if (!targetImg) return;
-            
-            let availableIndices = [];
-            for (let i = 0; i < photoList.length; i++) {
-                if (!activeImages.includes(i)) {
-                    availableIndices.push(i);
-                }
-            }
-            
-            if (availableIndices.length === 0) return;
-            const newIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-            activeImages[targetPos] = newIndex;
-            
-            targetImg.style.transition = "opacity 1s ease";
-            targetImg.style.opacity = "0";
-            
-            setTimeout(() => {
-                targetImg.src = photoList[newIndex];
-                targetImg.style.opacity = "1";
-            }, 1000);
         }
         
         function nextSlide(event) {
@@ -734,13 +673,9 @@
             startSlideTimer();
         }
         
-        function startBackgroundRotation() {
-            bgInterval = setInterval(rotateBackgroundPolaroid, 6000);
-        }
-        
+        // Inicializar slideshow
         initSlideshow();
         startSlideTimer();
-        startBackgroundRotation();
 
         const targetWeddingDate = new Date("2027-04-24T18:00:00").getTime();
         

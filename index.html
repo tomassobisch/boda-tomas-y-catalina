@@ -220,10 +220,48 @@
                     <button class="btn-comencemos !border-[#5D3F75] !text-[#5D3F75] hover:!bg-[#5D3F75] hover:!text-white shadow-lg hover:scale-105 active:scale-95">Desbloquea nuestra historia</button>
                 </div>
             </div>
-            <div class="intriga-blur text-center w-full h-full flex flex-col items-center justify-center">
-                <h1 class="text-4xl md:text-8xl mb-8 md:mb-12 serif italic accent-color">Catalina & Tomás</h1>
-                <div class="px-8 max-w-md w-full">
-                    <img src="imagenes/WhatsApp Image 2026-02-28 at 22.58.40 (1).jpeg" class="w-full photo-frame rotate-2">
+            <div class="intriga-blur text-center w-full h-full flex flex-col items-center justify-center py-6">
+                <h1 class="text-4xl md:text-8xl mb-4 md:mb-6 serif italic accent-color">Catalina & Tomás</h1>
+                
+                <!-- CONTENEDOR DE COLLAGE DE PLAYA -->
+                <div class="relative w-full max-w-lg mx-auto h-[380px] md:h-[480px] mt-4 flex items-center justify-center select-none">
+                    
+                    <!-- Foto Izquierda Fondo -->
+                    <div class="absolute left-2 md:left-6 w-40 h-52 md:w-52 md:h-68 transform -rotate-12 translate-y-4 hover:-rotate-6 hover:scale-105 transition-all duration-500 z-10">
+                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
+                            <img src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg" class="w-full h-full object-cover" alt="Playa Izquierda">
+                        </div>
+                    </div>
+                    
+                    <!-- Foto Derecha Fondo -->
+                    <div class="absolute right-2 md:right-6 w-40 h-52 md:w-52 md:h-68 transform rotate-12 translate-y-6 hover:rotate-6 hover:scale-105 transition-all duration-500 z-10">
+                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
+                            <img src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (3).jpeg" class="w-full h-full object-cover" alt="Playa Derecha">
+                        </div>
+                    </div>
+                    
+                    <!-- Foto Central Interactiva (Slideshow) -->
+                    <div class="absolute w-48 h-60 md:w-60 md:h-76 transform rotate-2 -translate-y-4 hover:rotate-0 hover:scale-105 transition-all duration-500 z-20 group">
+                        <div class="photo-frame bg-white p-2 md:p-3 pb-8 md:pb-10 shadow-xl relative h-full flex flex-col">
+                            <!-- Contenedor del Slideshow -->
+                            <div class="relative flex-1 overflow-hidden bg-gray-50">
+                                <img id="slide-img-1" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Slide 1">
+                                <img id="slide-img-2" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (2).jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 2">
+                                <img id="slide-img-3" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (4).jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 3">
+                                <img id="slide-img-4" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.26.jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 4">
+                                <img id="slide-img-5" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.26 (1).jpeg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 5">
+                            </div>
+                            
+                            <!-- Controles del Slideshow -->
+                            <button onclick="prevSlide(event)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#5D3F75] p-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                            </button>
+                            <button onclick="nextSlide(event)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#5D3F75] p-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </header>
@@ -467,6 +505,56 @@
         }
         window.addEventListener("scroll", reveal);
         
+        // Slideshow para el collage de fotos de la playa
+        let currentSlide = 1;
+        const totalSlides = 5;
+        let slideInterval;
+        
+        function showSlide(index) {
+            for (let i = 1; i <= totalSlides; i++) {
+                const img = document.getElementById(`slide-img-${i}`);
+                if (img) {
+                    if (i === index) {
+                        img.style.opacity = '1';
+                        img.style.zIndex = '1';
+                    } else {
+                        img.style.opacity = '0';
+                        img.style.zIndex = '0';
+                    }
+                }
+            }
+            currentSlide = index;
+        }
+        
+        function nextSlide(event) {
+            if (event) event.stopPropagation();
+            let next = currentSlide + 1;
+            if (next > totalSlides) next = 1;
+            showSlide(next);
+            resetSlideTimer();
+        }
+        
+        function prevSlide(event) {
+            if (event) event.stopPropagation();
+            let prev = currentSlide - 1;
+            if (prev < 1) prev = totalSlides;
+            showSlide(prev);
+            resetSlideTimer();
+        }
+        
+        function startSlideTimer() {
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, 3500);
+        }
+        
+        // Evitar múltiples intervalos
+        function resetSlideTimer() {
+            clearInterval(slideInterval);
+            startSlideTimer();
+        }
+        
+        startSlideTimer();
         // Control global de clics en la pantalla para iniciar y desbloquear
         window.addEventListener("click", (e) => {
             if (!experienceStarted) {

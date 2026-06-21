@@ -38,8 +38,6 @@
         /* --- ESCENA INICIAL --- */
         #video-overlay {
             position: fixed; inset: 0; z-index: 9999; background-color: #000;
-            background-image: url('imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg');
-            background-size: cover; background-position: center;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.8s;
         }
@@ -164,13 +162,26 @@
 
     <div id="leaf-container"></div>
 <div id="video-overlay" onclick="startExperience()" class="cursor-pointer">
+    <!-- Fondo de la foto principal borrosa -->
+    <div class="absolute inset-0 bg-cover bg-center filter blur-lg opacity-40 scale-105" style="background-image: url('imagenes/foto principal.jpeg');"></div>
     <div class="fume-layer"></div>
-    <div class="intro-ui w-full h-full flex flex-col justify-between items-center py-20 md:py-32 z-10">
+    <div class="intro-ui w-full h-full flex flex-col justify-between items-center py-10 md:py-16 z-10">
         <!-- Superior -->
         <div class="px-4 text-center">
-            <p class="uppercase font-light" style="color: white; letter-spacing: 0.3em; font-size: 0.6rem; margin-bottom: 1rem; md:letter-spacing: 0.5em; md:font-size: 0.7rem;">Nuestra historia comienza aquí</p>
-            <h2 class="serif italic text-6xl md:text-8xl" style="color: white;">C & T</h2>
-            <div class="w-8 h-[1px] bg-white/60 mx-auto mt-4 mb-4 md:w-12"></div>
+            <p class="uppercase font-light" style="color: white; letter-spacing: 0.3em; font-size: 0.6rem; margin-bottom: 0.5rem; md:letter-spacing: 0.5em; md:font-size: 0.7rem;">Nuestra historia comienza aquí</p>
+            <h2 class="serif italic text-5xl md:text-7xl" style="color: white;">C & T</h2>
+            <div class="w-8 h-[1px] bg-white/60 mx-auto mt-3 mb-3 md:w-12"></div>
+        </div>
+
+        <!-- Polaroid Central -->
+        <div class="w-[70%] max-w-xs px-2 my-auto transform rotate-1 hover:rotate-0 transition-transform duration-500">
+            <div class="photo-frame bg-white p-2.5 pb-8 shadow-2xl rounded-sm">
+                <div class="aspect-[3/4] overflow-hidden bg-gray-100">
+                    <img src="imagenes/foto principal.jpeg" class="w-full h-full object-cover" alt="Foto Principal">
+                </div>
+                <!-- Pequeña firma manuscrita -->
+                <p class="serif text-center text-xs md:text-sm text-gray-500 italic mt-3.5 select-none">Save the Date</p>
+            </div>
         </div>
 
         <!-- Inferior -->

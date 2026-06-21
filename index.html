@@ -260,6 +260,29 @@
                     </div>
                     
                 </div>
+
+                <!-- CONTADOR REGRESIVO ELEGANTE -->
+                <div id="countdown" class="mt-8 md:mt-12 flex items-center justify-center space-x-4 md:space-x-8 text-gray-700 select-none">
+                    <div class="flex flex-col items-center">
+                        <span id="countdown-days" class="font-serif italic text-3xl md:text-5xl accent-color font-bold">00</span>
+                        <span class="uppercase tracking-[0.2em] text-[8px] md:text-[9px] text-[#8BA889] font-semibold mt-1">Días</span>
+                    </div>
+                    <div class="h-8 w-[1px] bg-[#8BA889]/30"></div>
+                    <div class="flex flex-col items-center">
+                        <span id="countdown-hours" class="font-serif italic text-3xl md:text-5xl accent-color font-bold">00</span>
+                        <span class="uppercase tracking-[0.2em] text-[8px] md:text-[9px] text-[#8BA889] font-semibold mt-1">Horas</span>
+                    </div>
+                    <div class="h-8 w-[1px] bg-[#8BA889]/30"></div>
+                    <div class="flex flex-col items-center">
+                        <span id="countdown-minutes" class="font-serif italic text-3xl md:text-5xl accent-color font-bold">00</span>
+                        <span class="uppercase tracking-[0.2em] text-[8px] md:text-[9px] text-[#8BA889] font-semibold mt-1">Minutos</span>
+                    </div>
+                    <div class="h-8 w-[1px] bg-[#8BA889]/30"></div>
+                    <div class="flex flex-col items-center">
+                        <span id="countdown-seconds" class="font-serif italic text-3xl md:text-5xl accent-color font-bold">00</span>
+                        <span class="uppercase tracking-[0.2em] text-[8px] md:text-[9px] text-[#8BA889] font-semibold mt-1">Segundos</span>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -606,6 +629,43 @@
         // Ejecutar inicialización e iniciar timer
         initSlideshow();
         startSlideTimer();
+
+        // Contador regresivo para la boda: 24 de abril de 2027 a las 18:00 hs
+        const targetWeddingDate = new Date("2027-04-24T18:00:00").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetWeddingDate - now;
+            
+            const countdownEl = document.getElementById("countdown");
+            if (!countdownEl) return;
+
+            if (distance < 0) {
+                countdownEl.innerHTML = "<p class='serif italic text-xl md:text-2xl accent-color'>¡Llegó el gran día!</p>";
+                clearInterval(countdownInterval);
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            const dEl = document.getElementById("countdown-days");
+            const hEl = document.getElementById("countdown-hours");
+            const mEl = document.getElementById("countdown-minutes");
+            const sEl = document.getElementById("countdown-seconds");
+            
+            if (dEl && hEl && mEl && sEl) {
+                dEl.innerText = String(days).padStart(2, '0');
+                hEl.innerText = String(hours).padStart(2, '0');
+                mEl.innerText = String(minutes).padStart(2, '0');
+                sEl.innerText = String(seconds).padStart(2, '0');
+            }
+        }
+        
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
         // Control global de clics en la pantalla para iniciar y desbloquear
         window.addEventListener("click", (e) => {
             if (!experienceStarted) {

@@ -226,22 +226,44 @@
                 <!-- CONTENEDOR DE COLLAGE DE PLAYA -->
                 <div class="relative w-full max-w-lg mx-auto h-[380px] md:h-[480px] mt-4 flex items-center justify-center select-none">
                     
-                    <!-- Foto Izquierda Fondo -->
-                    <div class="absolute left-2 md:left-6 w-40 h-52 md:w-52 md:h-68 transform -rotate-12 translate-y-4 hover:-rotate-6 hover:scale-105 transition-all duration-500 z-10">
+                    <!-- Foto Far Left Fondo -->
+                    <div class="absolute left-2 md:left-4 w-32 h-44 md:w-44 md:h-58 transform -rotate-12 translate-y-6 hover:-rotate-6 hover:scale-105 transition-all duration-500 z-10">
                         <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <img id="img-polaroid-left" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg" class="w-full h-full object-cover" alt="Playa Izquierda">
+                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
+                                <img id="polaroid-img-1" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 1">
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Foto Derecha Fondo -->
-                    <div class="absolute right-2 md:right-6 w-40 h-52 md:w-52 md:h-68 transform rotate-12 translate-y-6 hover:rotate-6 hover:scale-105 transition-all duration-500 z-10">
+                    <!-- Foto Mid Left Fondo -->
+                    <div class="absolute left-10 md:left-20 w-34 h-46 md:w-46 md:h-60 transform -rotate-6 translate-y-2 hover:-rotate-2 hover:scale-105 transition-all duration-500 z-15">
                         <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
-                            <img id="img-polaroid-right" src="imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (3).jpeg" class="w-full h-full object-cover" alt="Playa Derecha">
+                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
+                                <img id="polaroid-img-2" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 2">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Foto Far Right Fondo -->
+                    <div class="absolute right-2 md:right-4 w-32 h-44 md:w-44 md:h-58 transform rotate-12 translate-y-8 hover:rotate-6 hover:scale-105 transition-all duration-500 z-10">
+                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
+                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
+                                <img id="polaroid-img-4" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Foto Mid Right Fondo -->
+                    <div class="absolute right-10 md:right-20 w-34 h-46 md:w-46 md:h-60 transform rotate-6 translate-y-4 hover:rotate-2 hover:scale-105 transition-all duration-500 z-15">
+                        <div class="photo-frame bg-white p-2 md:p-3 pb-6 md:pb-8 shadow-md">
+                            <div class="relative w-full h-full overflow-hidden bg-gray-50">
+                                <img id="polaroid-img-3" src="" class="w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Recuerdo 3">
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Foto Central Interactiva (Slideshow) -->
-                    <div class="absolute w-48 h-60 md:w-60 md:h-76 transform rotate-2 -translate-y-4 hover:rotate-0 hover:scale-105 transition-all duration-500 z-20 group">
+                    <div class="absolute w-44 h-56 md:w-56 md:h-72 transform rotate-2 -translate-y-4 hover:rotate-0 hover:scale-105 transition-all duration-500 z-20 group">
                         <div class="photo-frame bg-white p-2 md:p-3 pb-8 md:pb-10 shadow-xl relative h-full flex flex-col">
                             <!-- Contenedor del Slideshow -->
                             <div id="slideshow-container" class="relative flex-1 overflow-hidden bg-gray-50">
@@ -525,7 +547,6 @@
         }
         window.addEventListener("scroll", reveal);
         
-        // Listado de todas las fotos de recuerdos (18 fotos en total)
         const photoList = [
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.25.jpeg",
             "imagenes/WhatsApp Image 2026-06-21 at 17.10.25 (1).jpeg",
@@ -550,26 +571,21 @@
         let currentPhotoIndex = 0;
         let isTransitioning = false;
         let slideInterval;
+        let bgInterval;
+        let activeImages = [0, 1, 2, 3, 4];
         
         function initSlideshow() {
-            // Inicializar foto central
-            const activeImg = document.getElementById("slide-active");
-            if (activeImg && photoList.length > 0) {
-                activeImg.src = photoList[0];
-            }
+            let shuffledIndices = Array.from({length: photoList.length}, (_, i) => i);
+            shuffledIndices.sort(() => Math.random() - 0.5);
+            activeImages = shuffledIndices.slice(0, 5);
             
-            // Asignar fotos aleatorias no repetidas a las fotos de fondo (izquierda y derecha)
-            const leftImg = document.getElementById("img-polaroid-left");
-            const rightImg = document.getElementById("img-polaroid-right");
-            if (leftImg && rightImg && photoList.length >= 2) {
-                const randLeft = Math.floor(Math.random() * photoList.length);
-                let randRight = Math.floor(Math.random() * photoList.length);
-                while (randRight === randLeft) {
-                    randRight = Math.floor(Math.random() * photoList.length);
-                }
-                leftImg.src = photoList[randLeft];
-                rightImg.src = photoList[randRight];
-            }
+            document.getElementById("slide-active").src = photoList[activeImages[0]];
+            document.getElementById("polaroid-img-1").src = photoList[activeImages[1]];
+            document.getElementById("polaroid-img-2").src = photoList[activeImages[2]];
+            document.getElementById("polaroid-img-3").src = photoList[activeImages[3]];
+            document.getElementById("polaroid-img-4").src = photoList[activeImages[4]];
+            
+            currentPhotoIndex = activeImages[0];
         }
         
         function changeSlide(direction) {
@@ -583,6 +599,8 @@
             let nextIndex = currentPhotoIndex + direction;
             if (nextIndex >= photoList.length) nextIndex = 0;
             if (nextIndex < 0) nextIndex = photoList.length - 1;
+            
+            activeImages[0] = nextIndex;
             
             nextImg.src = photoList[nextIndex];
             nextImg.style.opacity = '0';
@@ -603,6 +621,32 @@
             }, 50);
         }
         
+        function rotateBackgroundPolaroid() {
+            if (photoList.length <= 5) return;
+            const targetPos = Math.floor(Math.random() * 4) + 1;
+            const targetImg = document.getElementById(`polaroid-img-${targetPos}`);
+            if (!targetImg) return;
+            
+            let availableIndices = [];
+            for (let i = 0; i < photoList.length; i++) {
+                if (!activeImages.includes(i)) {
+                    availableIndices.push(i);
+                }
+            }
+            
+            if (availableIndices.length === 0) return;
+            const newIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+            activeImages[targetPos] = newIndex;
+            
+            targetImg.style.transition = "opacity 1s ease";
+            targetImg.style.opacity = "0";
+            
+            setTimeout(() => {
+                targetImg.src = photoList[newIndex];
+                targetImg.style.opacity = "1";
+            }, 1000);
+        }
+        
         function nextSlide(event) {
             if (event) event.stopPropagation();
             changeSlide(1);
@@ -616,9 +660,7 @@
         }
         
         function startSlideTimer() {
-            slideInterval = setInterval(() => {
-                changeSlide(1);
-            }, 3500);
+            slideInterval = setInterval(() => { changeSlide(1); }, 3500);
         }
         
         function resetSlideTimer() {
@@ -626,11 +668,14 @@
             startSlideTimer();
         }
         
-        // Ejecutar inicialización e iniciar timer
+        function startBackgroundRotation() {
+            bgInterval = setInterval(rotateBackgroundPolaroid, 6000);
+        }
+        
         initSlideshow();
         startSlideTimer();
+        startBackgroundRotation();
 
-        // Contador regresivo para la boda: 24 de abril de 2027 a las 18:00 hs
         const targetWeddingDate = new Date("2027-04-24T18:00:00").getTime();
         
         function updateCountdown() {

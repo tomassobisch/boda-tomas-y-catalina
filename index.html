@@ -575,18 +575,32 @@
                     <form id="rsvp-form" onsubmit="submitRSVP(event)" class="space-y-6">
                         <div id="rsvp-form-content" class="space-y-6">
                             
-                            <!-- Campo 1: Nombre y Apellido -->
-                            <div>
-                                <label for="rsvp-name" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
-                                    Nombre y Apellido <span class="text-[#5D3F75] font-bold">*</span>
-                                </label>
-                                <input 
-                                    type="text" 
-                                    id="rsvp-name" 
-                                    required 
-                                    placeholder="Ej: Catalina Rodríguez" 
-                                    class="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] focus:ring-2 focus:ring-[#8BA889]/20 transition-all text-gray-800 text-sm placeholder:text-gray-400 bg-[#FAF8FC]/50"
-                                >
+                            <!-- Campo 1: Nombre y Apellido (2 Columnas) -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="rsvp-nombre" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                                        Nombre <span class="text-[#5D3F75] font-bold">*</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="rsvp-nombre" 
+                                        required 
+                                        placeholder="Ej: Carlos" 
+                                        class="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] focus:ring-2 focus:ring-[#8BA889]/20 transition-all text-gray-800 text-sm placeholder:text-gray-400 bg-[#FAF8FC]/50"
+                                    >
+                                </div>
+                                <div>
+                                    <label for="rsvp-apellido" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                                        Apellido <span class="text-[#5D3F75] font-bold">*</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="rsvp-apellido" 
+                                        required 
+                                        placeholder="Ej: Gómez" 
+                                        class="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] focus:ring-2 focus:ring-[#8BA889]/20 transition-all text-gray-800 text-sm placeholder:text-gray-400 bg-[#FAF8FC]/50"
+                                    >
+                                </div>
                             </div>
 
                             <!-- Campo 2: Asistencia (Radio Cards) -->
@@ -612,23 +626,55 @@
                                 </div>
                             </div>
 
-                            <!-- Campo 3: Menú Especial (Ocultable si marca 'No') -->
+                            <!-- Campo 3: Acompañantes y Menú (Ocultable si marca 'No') -->
                             <div id="menu-selection-container" class="space-y-5 pt-2 border-t border-gray-100 transition-all duration-300">
+                                
+                                <!-- Acompañantes adicionales -->
                                 <div>
-                                    <label for="rsvp-menu" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
-                                        Preferencia de Menú
+                                    <label class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                                        Acompañantes adicionales
+                                    </label>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="rsvp-adultos" class="block text-[11px] text-gray-500 mb-1 font-medium">Adultos extra</label>
+                                            <select id="rsvp-adultos" class="w-full px-3.5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] bg-white text-gray-800 text-sm cursor-pointer">
+                                                <option value="0">0 (Solo yo)</option>
+                                                <option value="1">+1 Adulto</option>
+                                                <option value="2">+2 Adultos</option>
+                                                <option value="3">+3 Adultos</option>
+                                                <option value="4">+4 Adultos</option>
+                                                <option value="5">+5 Adultos</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="rsvp-ninos" class="block text-[11px] text-gray-500 mb-1 font-medium">Niños extra</label>
+                                            <select id="rsvp-ninos" class="w-full px-3.5 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] bg-white text-gray-800 text-sm cursor-pointer">
+                                                <option value="0">0 Niños</option>
+                                                <option value="1">1 Niño</option>
+                                                <option value="2">2 Niños</option>
+                                                <option value="3">3 Niños</option>
+                                                <option value="4">4 Niños</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Restricciones Alimentarias -->
+                                <div>
+                                    <label for="rsvp-restricciones" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                                        Restricciones Alimentarias
                                     </label>
                                     <div class="relative">
                                         <select 
-                                            id="rsvp-menu" 
+                                            id="rsvp-restricciones" 
                                             class="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] focus:ring-2 focus:ring-[#8BA889]/20 bg-white text-gray-800 text-sm appearance-none cursor-pointer"
                                         >
-                                            <option value="Menú Tradicional">Menú Tradicional (Sin restricciones)</option>
-                                            <option value="Vegetariano">Menú Vegetariano</option>
-                                            <option value="Vegano">Menú Vegano</option>
-                                            <option value="Celíaco (Sin TACC)">Menú Celíaco (Sin TACC)</option>
-                                            <option value="Alergias o Intolerancias">Alergias o Intolerancias alimentarias</option>
-                                            <option value="Menú Infantil">Menú Infantil</option>
+                                            <option value="Ninguna">Ninguna</option>
+                                            <option value="Vegetariano">Vegetariano</option>
+                                            <option value="Vegano">Vegano</option>
+                                            <option value="Celíaca (sin gluten)">Celíaca (sin gluten)</option>
+                                            <option value="Sin lactosa">Sin lactosa</option>
+                                            <option value="Otra">Otra restricción / alergia (especificar abajo)</option>
                                         </select>
                                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -637,27 +683,27 @@
                                 </div>
 
                                 <div>
-                                    <label for="rsvp-alergias" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
-                                        Alergias o detalles alimentarios (opcional)
+                                    <label for="rsvp-restricciones-detalle" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                                        Detalle de alergias o alimentación (opcional)
                                     </label>
                                     <input 
                                         type="text" 
-                                        id="rsvp-alergias" 
-                                        placeholder="Ej: Alergia al maní, intolerancia a la lactosa, mariscos..." 
+                                        id="rsvp-restricciones-detalle" 
+                                        placeholder="Ej: Alergia al maní, intolerancia a frutos secos..." 
                                         class="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] focus:ring-2 focus:ring-[#8BA889]/20 transition-all text-gray-800 text-sm placeholder:text-gray-400 bg-[#FAF8FC]/50"
                                     >
                                 </div>
                             </div>
 
-                            <!-- Campo 4: Mensaje o Canción -->
+                            <!-- Campo 4: Mensaje / Comentarios -->
                             <div class="pt-2 border-t border-gray-100">
-                                <label for="rsvp-message" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
-                                    Mensaje para los novios o canción para la fiesta (opcional)
+                                <label for="rsvp-mensaje" class="block text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                                    Mensaje / Comentarios (opcional)
                                 </label>
                                 <textarea 
-                                    id="rsvp-message" 
+                                    id="rsvp-mensaje" 
                                     rows="3" 
-                                    placeholder="¿Qué tema no puede faltar en la pista o qué mensaje nos querés dejar?" 
+                                    placeholder="¡Dejános unas palabras o sugerencia para la fiesta!" 
                                     class="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:outline-none focus:border-[#8BA889] focus:ring-2 focus:ring-[#8BA889]/20 transition-all text-gray-800 text-sm placeholder:text-gray-400 bg-[#FAF8FC]/50 resize-none"
                                 ></textarea>
                             </div>
@@ -981,13 +1027,23 @@
             const btnText = document.getElementById("rsvp-btn-text");
             const btnSpinner = document.getElementById("rsvp-btn-spinner");
 
-            const nombre = document.getElementById("rsvp-name").value.trim();
-            const asistencia = document.querySelector('input[name="asistencia"]:checked')?.value || "Sí";
-            const menu = asistencia === "Sí" ? document.getElementById("rsvp-menu").value : "No aplica (No asiste)";
-            const alergias = asistencia === "Sí" ? document.getElementById("rsvp-alergias").value.trim() : "";
-            const mensaje = document.getElementById("rsvp-message").value.trim();
+            const nombre = document.getElementById("rsvp-nombre")?.value.trim() || "";
+            const apellido = document.getElementById("rsvp-apellido")?.value.trim() || "";
+            const asiste = document.querySelector('input[name="asistencia"]:checked')?.value || "Sí";
+            const adultos = asiste === "Sí" ? parseInt(document.getElementById("rsvp-adultos")?.value || "0", 10) : 0;
+            const ninos = asiste === "Sí" ? parseInt(document.getElementById("rsvp-ninos")?.value || "0", 10) : 0;
+            
+            let restricciones = asiste === "Sí" ? (document.getElementById("rsvp-restricciones")?.value || "Ninguna") : "Ninguna";
+            const detalleRestriccion = document.getElementById("rsvp-restricciones-detalle")?.value.trim() || "";
+            if (restricciones === "Otra" && detalleRestriccion) {
+                restricciones = detalleRestriccion;
+            } else if (detalleRestriccion && restricciones !== "Ninguna") {
+                restricciones = `${restricciones} (${detalleRestriccion})`;
+            }
 
-            if (!nombre) {
+            const mensaje = document.getElementById("rsvp-mensaje")?.value.trim() || "";
+
+            if (!nombre || !apellido) {
                 alert("Por favor, completa tu nombre y apellido.");
                 return;
             }
@@ -997,13 +1053,20 @@
             btnText.innerText = "Enviando confirmación...";
             btnSpinner.classList.remove("hidden");
 
+            // Formato de fecha estándar: YYYY-MM-DD HH:mm:ss (igual al de la hoja)
+            const now = new Date();
+            const pad = (n) => String(n).padStart(2, '0');
+            const timestamp = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
             const guestData = {
-                timestamp: new Date().toLocaleString("es-AR", { dateStyle: "short", timeStyle: "short" }),
+                timestamp: timestamp,
                 nombre: nombre,
-                asistencia: asistencia,
-                menu: menu,
-                alergias: alergias || "Ninguna",
-                mensaje: mensaje || ""
+                apellido: apellido,
+                asiste: asiste,
+                adultos: adultos,
+                ninos: ninos,
+                restricciones: restricciones,
+                mensaje: mensaje
             };
 
             // 1. Guardar copia de seguridad en el almacenamiento local del navegador
@@ -1033,14 +1096,14 @@
                 document.getElementById("rsvp-form-content").classList.add("hidden");
                 const successView = document.getElementById("rsvp-success-content");
                 successView.classList.remove("hidden");
-                document.getElementById("rsvp-success-guest-name").innerText = nombre;
+                document.getElementById("rsvp-success-guest-name").innerText = `${nombre} ${apellido}`;
 
             } catch (error) {
                 console.error("Error al enviar a la hoja de cálculo:", error);
                 document.getElementById("rsvp-form-content").classList.add("hidden");
                 const successView = document.getElementById("rsvp-success-content");
                 successView.classList.remove("hidden");
-                document.getElementById("rsvp-success-guest-name").innerText = nombre;
+                document.getElementById("rsvp-success-guest-name").innerText = `${nombre} ${apellido}`;
             } finally {
                 submitBtn.disabled = false;
                 btnText.innerText = "Confirmar Asistencia";

@@ -1006,8 +1006,8 @@
         // ==========================================
         // GESTIÓN DE CONFIRMACIÓN DE ASISTENCIA (RSVP)
         // ==========================================
-        // Coloca aquí la URL de tu Google Apps Script (Web App) o Webhook para Excel:
-        const RSVP_EXCEL_ENDPOINT = ""; 
+        // URL de Google Apps Script vinculada a la hoja de cálculo:
+        const RSVP_EXCEL_ENDPOINT = "https://script.google.com/macros/s/AKfycbyPtmL2adBt34S5fIRCfpfYP42dywOqrY2d8C3Z9StMU-462xwWVzJJGBlNQiS8aL7l7A/exec"; 
 
         function handleAttendanceChange() {
             const isAttending = document.getElementById("attend-yes")?.checked;
@@ -1084,7 +1084,7 @@
                     await fetch(RSVP_EXCEL_ENDPOINT, {
                         method: "POST",
                         mode: "no-cors",
-                        headers: { "Content-Type": "application/json" },
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
                         body: JSON.stringify(guestData)
                     });
                 } else {
